@@ -388,27 +388,63 @@
                     </div>
 
 
-                    <div class="lynx-chat-container">
-                        <div class="chat-header">
-                            <div class="chat-avatar">
-                                <i class="fa-solid fa-robot"></i>
-                                <div class="online-indicator"></div>
-                            </div>
-                            <div class="chat-titles">
-                                <h3>LYNX Assistant</h3>
-                                <span>Powered by AI · Ask me anything</span>
-                            </div>
+                    <div class="skills-issues-section">
+                        <div class="skills-header-3d">
+                            <h2 class="skills-title-3d" data-text="Skills issues?">Skills issues?</h2>
                         </div>
-                        <div class="chat-messages" id="chat-messages">
-                            <div class="chat-message bot">
-                                <div class="msg-bubble">
-                                    Hello! I am Lynx's personal AI Assistant. How can I help you today?
+                        <div class="skills-grid-creative">
+                            <div class="skill-creative-card" data-tilt>
+                                <div class="skill-card-img">
+                                    <img src="{{ url_for('static', path='Assets/python_anime.png') }}" alt="Python">
                                 </div>
+                                <div class="skill-card-info">
+                                    <h3>Python</h3>
+                                    <div class="skill-progress-container">
+                                        <div class="skill-progress-bar" style="width: 92%;"></div>
+                                        <span>92%</span>
+                                    </div>
+                                </div>
+                                <div class="skill-card-bg-glow"></div>
                             </div>
-                        </div>
-                        <div class="chat-input-area">
-                            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
-                            <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+                            <div class="skill-creative-card" data-tilt>
+                                <div class="skill-card-img">
+                                    <img src="{{ url_for('static', path='Assets/js_anime.png') }}" alt="JS">
+                                </div>
+                                <div class="skill-card-info">
+                                    <h3>JavaScript</h3>
+                                    <div class="skill-progress-container">
+                                        <div class="skill-progress-bar" style="width: 88%;"></div>
+                                        <span>88%</span>
+                                    </div>
+                                </div>
+                                <div class="skill-card-bg-glow"></div>
+                            </div>
+                            <div class="skill-creative-card" data-tilt>
+                                <div class="skill-card-img">
+                                    <img src="{{ url_for('static', path='Assets/java_anime.png') }}" alt="Java">
+                                </div>
+                                <div class="skill-card-info">
+                                    <h3>Java</h3>
+                                    <div class="skill-progress-container">
+                                        <div class="skill-progress-bar" style="width: 85%;"></div>
+                                        <span>85%</span>
+                                    </div>
+                                </div>
+                                <div class="skill-card-bg-glow"></div>
+                            </div>
+                            <div class="skill-creative-card" data-tilt>
+                                <div class="skill-card-img">
+                                    <img src="{{ url_for('static', path='Assets/html_css_anime.png') }}" alt="HTML">
+                                </div>
+                                <div class="skill-card-info">
+                                    <h3>HTML/CSS</h3>
+                                    <div class="skill-progress-container">
+                                        <div class="skill-progress-bar" style="width: 95%;"></div>
+                                        <span>95%</span>
+                                    </div>
+                                </div>
+                                <div class="skill-card-bg-glow"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -446,6 +482,10 @@
                                     <i class="fa-solid fa-plus"></i> Invite Bot
                                 </a>
                             </div>
+                            <div class="project-description-text">
+                                A powerful, feature-rich Discord bot designed for ultimate server management and
+                                entertainment.
+                            </div>
                             <div class="always-show-features">
                                 <div class="feature-title"><i class="fa-solid fa-list-ul"></i> DESCRIPTION</div>
                                 <div class="feature-list">
@@ -477,6 +517,10 @@
                                 <a href="https://lynxauth.qzz.io/" target="_blank" class="btn btn-primary">
                                     <i class="fa-solid fa-link"></i> View Project
                                 </a>
+                            </div>
+                            <div class="project-description-text">
+                                A secure and robust authentication system for applications, featuring real-time
+                                monitoring and HWID locking.
                             </div>
                             <div class="always-show-features">
                                 <div class="feature-title"><i class="fa-solid fa-lock"></i> SECURITY</div>
@@ -513,6 +557,10 @@
                                 <a href="#" target="_blank" class="btn btn-primary">
                                     <i class="fa-solid fa-link"></i> View Project
                                 </a>
+                            </div>
+                            <div class="project-description-text">
+                                My personal portfolio website designed with a premium, dark-themed aesthetic and
+                                high-performance animations.
                             </div>
                             <div class="always-show-features">
                                 <div class="feature-title"><i class="fa-solid fa-star"></i> HIGHLIGHTS</div>
@@ -741,6 +789,39 @@
             <div class="modal-actions">
                 <a href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-gold modal-buy-btn">Buy Now on
                     Discord <i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="floating-chat-wrapper">
+        <button class="chat-toggle-trigger" id="chat-toggle-btn">
+            <i class="fa-solid fa-robot"></i>
+            <span class="pulse-ring"></span>
+        </button>
+
+        <div class="lynx-chat-popup" id="chat-popup">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <i class="fa-solid fa-robot"></i>
+                    <div class="online-indicator"></div>
+                </div>
+                <div class="chat-titles">
+                    <h3>LYNX AI</h3>
+                    <span>Online</span>
+                </div>
+                <button class="close-chat" id="close-chat-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-message bot">
+                    <div class="msg-bubble">
+                        Hey there! I'm LYNX AI. How can I assist you today?
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Ask anything..." autocomplete="off">
+                <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
