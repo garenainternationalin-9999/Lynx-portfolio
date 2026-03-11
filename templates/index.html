@@ -188,6 +188,35 @@
                 </div>
             </div>
 
+            <div class="aura-diary-section">
+                <div class="diary-container">
+                    <div class="diary-paper">
+                        <div class="diary-header">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                            <h3>AURA LOG</h3>
+                            <span class="diary-date" id="current-date"></span>
+                        </div>
+                        <div class="diary-content">
+                            <div class="thought-row">
+                                <span class="thought-label">THOUGHTS:</span>
+                                <span class="thought-text" id="cycling-thought">System initializing...</span>
+                            </div>
+                            <div class="thought-row">
+                                <span class="thought-label">GOALS:</span>
+                                <span class="thought-text" id="cycling-goal">Establishing connection...</span>
+                            </div>
+                            <div class="thought-row">
+                                <span class="thought-label">FEELINGS:</span>
+                                <span class="thought-text" id="cycling-feeling">Syncing aura...</span>
+                            </div>
+                        </div>
+                        <div class="diary-footer">
+                            <div class="leather-strap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 
@@ -836,6 +865,50 @@
             glare: true,
             "max-glare": 0.2,
         });
+
+        const thoughts = [
+            "Code is like poetry; most people don't understand it.",
+            "Stability is not just code, it's a mindset.",
+            "Building the future, one line at a time.",
+            "Efficiency is the ultimate sophistication."
+        ];
+        const goals = [
+            "Mastering decentralized intelligence.",
+            "Reaching 100k+ active users on PrimeX.",
+            "Developing a full-scale BOT.",
+            "Optimizing every millisecond of performance."
+        ];
+        const feelings = [
+            "Fueled by dark mode and caffeine.",
+            "Determined to break the simulation.",
+            "Feeling the aura of peak development.",
+            "Syncing with the mainframe..."
+        ];
+
+        function updateCyclingText(id, array) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let index = 0;
+            setInterval(() => {
+                el.classList.add('text-changing');
+                setTimeout(() => {
+                    index = (index + 1) % array.length;
+                    el.innerText = array[index];
+                }, 250);
+                setTimeout(() => el.classList.remove('text-changing'), 500);
+            }, 4000);
+        }
+
+        const dateEl = document.getElementById('current-date');
+        if (dateEl) {
+            dateEl.innerText = new Date().toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            });
+        }
+
+        updateCyclingText('cycling-thought', thoughts);
+        updateCyclingText('cycling-goal', goals);
+        updateCyclingText('cycling-feeling', feelings);
     </script>
 </body>
 
