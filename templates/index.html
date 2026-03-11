@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYNX Developer | Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='Assets/favicon.ico') }}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Montserrat:wght@700;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+    <div class="app-background">
+        <div class="red-glow-top"></div>
+        <div class="dotted-overlay"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo-brand" onclick="switchTab('home')">
+                <i class="fa-solid fa-microchip"></i>
+                <span>LYNX</span>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <a href="#" class="nav-pill active" data-id="home">
+                <i class="fa-solid fa-house"></i> <span>Home</span>
+            </a>
+
+            <a href="#" class="nav-pill" data-id="services">
+                <i class="fa-solid fa-layer-group"></i> <span>Projects</span>
+            </a>
+
+            <a href="#" class="nav-pill" data-id="store">
+                <i class="fa-solid fa-store"></i> <span>Store</span>
+            </a>
+
+            <a href="#" class="nav-pill" data-id="about">
+                <i class="fa-solid fa-circle-info"></i> <span>About</span>
+            </a>
+
+        </div>
+
+        <div class="nav-right">
+            <a href="https://discord.gg/44mKrHfQ6q" class="discord-login">
+                Support on Discord <i class="fa-brands fa-discord"></i>
+            </a>
+
+            <button class="hamburger-menu" id="hamburger-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+
+    <div class="mobile-nav-overlay" id="mobile-menu">
+        <div class="mobile-nav-content">
+            <a href="#" class="mobile-link" data-id="home"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#" class="mobile-link" data-id="services"><i class="fa-solid fa-layer-group"></i> Projects</a>
+            <a href="#" class="mobile-link" data-id="store"><i class="fa-solid fa-store"></i> Store</a>
+            <a href="#" class="mobile-link" data-id="about"><i class="fa-solid fa-circle-info"></i> About</a>
+        </div>
+    </div>
+
+    <main class="hero-section">
+
+
+        <div id="home-content" class="content-tab">
+            <div class="hero-content">
+                <h1 class="brand-title">
+                    <i class="fa-solid fa-code-branch"></i>
+                    LYNX <span class="outline-text">AURA</span>
+                </h1>
+                <h2 class="hero-headline">
+                    The Developer. <br>
+                    <span class="red-text">Full Stack.</span>
+                </h2>
+                <p class="hero-subtext">ULTIMATE WEB DEVELOPMENT</p>
+                <p class="hero-description">
+                    Finding a web developer, want pc tools?, Want to learn? LYNX is always here for
+                    <strong>peak DEVELOPMENT, stability</strong>, and <strong>responsiveness</strong>—so you can focus
+                    on winning.
+                </p>
+                <div class="stats-row">
+                    <div class="stat-badge"><strong>100+</strong> Clients</div>
+                    <div class="stat-badge"><strong>99%</strong> Satisfaction</div>
+                    <div class="stat-badge"><strong>2+</strong> Years Exp.</div>
+                </div>
+            </div>
+
+
+            <div class="floating-marquee">
+                <div class="marquee-track">
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review8.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 5.0
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review7.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 4.9
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review6.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review5.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 5.0
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review1.png') }}" alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review2.png') }}" alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review3.png') }}" alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review4.png') }}" alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div id="about-content" class="content-tab" style="display: none;">
+            <div class="about-container">
+                <div class="about-text">
+                    <h1 class="about-title">ABOUT <span class="red-text">ME</span></h1>
+                    <p>Hey, i am LYNX jsut an another 17 yrs old developer , always here trying to learning something
+                        new .</p>
+                    <p>I maked pc tools , hacking tools , full stack websites etc . Python , Java expert . Feel free to
+                        dm me on my discord .</p>
+
+
+
+
+
+                    <div class="discord-card-wrapper">
+
+                        <a href="https://discord.com/users/1394305163136733205" target="_blank"
+                            class="discord-card-link">
+
+                            <div id="discord-card" class="discord-card offline">
+
+
+                                <div class="discord-top-label">
+                                    <i class="fa-brands fa-discord"></i> DISCORD
+                                </div>
+
+
+                                <div class="discord-inner-row">
+                                    <div class="discord-header-img">
+                                        <img id="discord-pfp" src="{{ url_for('static', path='Assets/lynxlogo.jpg') }}" alt="Discord Avatar">
+                                        <div id="discord-status-dot" class="status-dot"></div>
+                                    </div>
+                                    <div class="discord-info">
+                                        <h3 id="discord-username">Loading...</h3>
+                                        <p id="discord-activity">Fetching status...</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+
+
+
+
+                    <div class="tech-stack-row">
+
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/Python.webp') }}" alt="Py">
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/node.png') }}" alt="Node">
+                            <span>Node.js</span>
+                        </div>
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/java.png') }}" alt="Java">
+                            <span>Java</span>
+                        </div>
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/html.png') }}" alt="HTML">
+                            <span>Html</span>
+                        </div>
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/css.png') }}" alt="CSS">
+                            <span>Css</span>
+                        </div>
+
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/csharp.png') }}" alt="CSHARP">
+                            <span>C#</span>
+                        </div>
+
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/cplus.png') }}" alt="CPLUSPLUS">
+                            <span>C++</span>
+                        </div>
+
+                        <div class="tech-card">
+                             <img src="{{ url_for('static', path='Assets/mongodb.png') }}" alt="MONGODB">
+                            <span>Mongo DB</span>
+                        </div>
+                    </div>
+
+
+                    <div class="about-socials">
+                        <a href="https://www.youtube.com/@LYNX_X_999" target="_blank" class="social-btn youtube"><i
+                                class="fa-brands fa-youtube"></i></a>
+                        <a href="https://discord.com/users/1394305163136733205" target="_blank"
+                            class="social-btn discord"><i class="fa-brands fa-discord"></i></a>
+                    </div>
+                </div>
+                 <div class="about-image"><img src="{{ url_for('static', path='Assets/about.jpg') }}" alt="Profile"></div>
+            </div>
+
+            <div class="hobbies-goals-container">
+                <div class="hobbies-section">
+                    <h2 class="section-subtitle">EXTRA <span class="red-text">HOBBIES</span></h2>
+                    <div class="hobbies-grid">
+                        <div class="hobby-card">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <h3>Gaming</h3>
+                            <p>Exploring immersive worlds and competitive multiplayer.</p>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fa-solid fa-headphones"></i>
+                            <h3>Music</h3>
+                            <p>Listening to lo-fi beats and intense tracks while coding.</p>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fa-solid fa-microchip"></i>
+                            <h3>Tech Tinkering</h3>
+                            <p>Customizing OS, messing with hardware, and optimization.</p>
+                        </div>
+                        <div class="hobby-card">
+                            <i class="fa-solid fa-dumbbell"></i>
+                            <h3>Fitness</h3>
+                            <p>Staying healthy and active outside of the digital screen.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-container" style="width: 100%; margin-top: 40px; margin-bottom: 0;">
+                        <h2 class="section-subtitle" style="text-align: left; margin-bottom: 30px; font-size: 1.8rem;">
+                            MY <span class="red-text">JOURNEY</span></h2>
+                        <div class="timeline timeline-left" style="max-width: 100%;">
+                            <div class="timeline-item" data-tilt data-tilt-glare data-tilt-max-glare="0.5"
+                                data-tilt-scale="1.05" style="width: 100%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 style="transform: translateZ(30px);">Started Coding</h3>
+                                    <span class="timeline-date" style="transform: translateZ(20px);">2022</span>
+                                    <p style="transform: translateZ(40px);">Began my journey with basic HTML/CSS and
+                                        simple scripts, exploring the world of programming.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-tilt data-tilt-glare data-tilt-max-glare="0.5"
+                                data-tilt-scale="1.05" style="width: 100%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 style="transform: translateZ(30px);">Mastering Python & Java</h3>
+                                    <span class="timeline-date" style="transform: translateZ(20px);">2023</span>
+                                    <p style="transform: translateZ(40px);">Dove deep into backend development, creating
+                                        PC tools, hacking utilities, and automation bots.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-tilt data-tilt-glare data-tilt-max-glare="0.5"
+                                data-tilt-scale="1.05" style="width: 100%;">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <h3 style="transform: translateZ(30px);">Full Stack & Projects</h3>
+                                    <span class="timeline-date" style="transform: translateZ(20px);">2024 -
+                                        Present</span>
+                                    <p style="transform: translateZ(40px);">Building comprehensive full-stack websites,
+                                        advanced Discord bots, and complex native applications for various clients.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goals-section">
+                    <h2 class="section-subtitle">MY <span class="red-text">GOALS</span></h2>
+                    <div class="goals-list">
+                        <div class="goal-item">
+                            <i class="fa-solid fa-check-circle completed"></i>
+                            <div class="goal-text">
+                                <h3>Learn Full-Stack Web Dev</h3>
+                                <p>Master frontend frameworks and secure backends.</p>
+                            </div>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fa-solid fa-check-circle completed"></i>
+                            <div class="goal-text">
+                                <h3>Build a Premium Discord Bot</h3>
+                                <p>Deploy a successful and feature-rich bot (PrimeX).</p>
+                            </div>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fa-regular fa-circle pending"></i>
+                            <div class="goal-text">
+                                <h3>Develop a SaaS Product</h3>
+                                <p>Create a scalable software-as-a-service application.</p>
+                            </div>
+                        </div>
+                        <div class="goal-item">
+                            <i class="fa-regular fa-circle pending"></i>
+                            <div class="goal-text">
+                                <h3>Reach 1k+ Active Users</h3>
+                                <p>Expand my userbase across my open-source tools.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="lynx-chat-container">
+                        <div class="chat-header">
+                            <div class="chat-avatar">
+                                <i class="fa-solid fa-robot"></i>
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="chat-titles">
+                                <h3>LYNX Assistant</h3>
+                                <span>Powered by AI · Ask me anything</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="chat-message bot">
+                                <div class="msg-bubble">
+                                    Hello! I am Lynx's personal AI Assistant. How can I help you today?
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                            <button id="chat-send"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="services-content" class="content-tab" style="display: none;">
+            <div class="services-container">
+                <header class="service-header">
+                    <h1 class="brand-title" style="font-size: 3rem;">MAIN <span class="outline-text">PROJECTS</span>
+                    </h1>
+                    <p class="service-subtitle">Here are my projects which i created in my journey</p>
+                </header>
+                <section class="tools-grid">
+
+                    <div class="paragon-card">
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        <div class="card-header">
+                            <i class="fa-brands fa-discord"></i>
+                            <h2>PrimeX discord bot</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="dev-tag">Language: Python</p>
+                            <div class="btn-group">
+
+                                <a href="https://discord.com/oauth2/authorize?client_id=1469585966347059365"
+                                    target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-plus"></i> Invite Bot
+                                </a>
+                            </div>
+                            <details class="show-more">
+                                <summary><i class="fa-solid fa-list-ul"></i> Description</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-shield"></i> Advance security</div>
+                                    <div class="f-item"><i class="fa-solid fa-music"></i> Premium music</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="paragon-card">
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        <div class="card-header">
+                            <i class="fa-solid fa-shield-halved icon-red"></i>
+                            <h2>LYNX AUTH</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="dev-tag">Language: Python / Java script</p>
+                            <div class="btn-group">
+                                <a href="https://lynxauth.qzz.io/" target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-link"></i> View Project
+                                </a>
+                            </div>
+                            <details class="show-more">
+                                <summary><i class="fa-solid fa-lock"></i> Security Features</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-fingerprint"></i> HWID Verification</div>
+                                    <div class="f-item"><i class="fa-solid fa-cloud"></i> Real-time Dashboard</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="paragon-card">
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        <div class="card-header">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <h2>Portfolio Website</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="dev-tag">Language: Python / Java script</p>
+                            <div class="btn-group">
+                                <a href="#" target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-link"></i> View Project
+                                </a>
+                            </div>
+                            <details class="show-more">
+                                <summary><i class="fa-solid fa-lock"></i> Features</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-heart"></i> The project closest to me.
+                                    </div>
+                                    <div class="f-item"><i class="fa-solid fa-circle-user"></i> About my everything.
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                </section>
+
+                <header class="service-header" style="margin-top: 4rem;">
+                    <h1 class="brand-title" style="font-size: 3rem;">EXTRA<span class="outline-text">PROJECTS</span>
+                    </h1>
+                    <p class="service-subtitle">Some extra projects , created for fun 😅</p>
+                </header>
+                <section class="tools-grid">
+
+
+                    <div class="paragon-card premium-border">
+                        <div class="badge-opensource"><i class="fa-solid fa-code-branch"></i> Open Source</div>
+                        <div class="card-header"><i class="fas fa-bolt icon-gold"></i>
+                            <h2>SERVER CLONER</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="price-tag" style="color: #ffd766;">Free</p>
+                            <p class="dev-tag">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="https://discord.gg/Sz5ZGfk3GX" class="btn btn-gold"><i
+                                        class="fa-solid fa-download"></i> Download</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <details class="show-more">
+                                <summary><i class="fa-solid fa-star"></i> Premium Features</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-box-open"></i> Full Open Source</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="nightmare-card">
+                        <div class="beta-badge">BETA 0.0</div>
+                        <div class="card-header"><i class="fa-solid fa-ghost"></i>
+                            <h2 class="nightmare-title">NIGHTMARE</h2><span class="ghost-sub">Kernel Level
+                                Spammer</span>
+                        </div>
+                        <div class="card-content">
+                            <p class="price-tag" style="color: #b39cff;">FREE</p>
+                            <p class="dev-tag" style="color: #8a7ab0;">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="services/NIGHTMARE.zip" download
+                                    class="btn nightmare-btn"><i class="fas fa-download"></i> Download</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <details class="show-more nightmare-details">
+                                <summary><i class="fa-solid fa-dna"></i> Core Features</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-robot"></i> Self Bot Spammer</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="paragon-card">
+                        <div class="card-header"><i class="fa-solid fa-cloud icon-red"></i>
+                            <h2>DM PROMO BOT</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="price-tag">FREE</p>
+                            <p class="dev-tag">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="https://dm-bot-web-service.onrender.com/"
+                                    class="btn btn-primary"><i class="fa-solid fa-cloud"></i> Run Now</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <details class="show-more">
+                                <summary><i class="fa-solid fa-server"></i> Features & Info</summary>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-bolt"></i> Fast & Reliable</div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div id="store-content" class="content-tab" style="display: none;">
+            <div class="store-container">
+                <div class="store-top-header">
+                    <h1>Our Services</h1>
+                    <div class="store-tags"><span class="tag tag-red">Premium</span><span
+                            class="tag tag-purple">Basic</span><span class="tag tag-yellow">Best?</span><span
+                            class="tag tag-green">Safe</span></div>
+                </div>
+
+                <div class="store-category-row">
+                    <div class="cat-label label-red">Premium</div>
+                    <h2 class="cat-title">Premium Services</h2>
+                    <div class="store-grid">
+                        <div class="store-card red-theme">
+                            <h3>Lynx opt v.0</h3>
+                            <div class="store-price">₹200 <span class="currency">INR</span><span class="time"><i
+                                        class="far fa-clock"></i> Lifetime</span></div>
+                            <p class="store-desc">The package you won't get anywhere else. By the Elites, for the
+                                Elites. Completely re-designed from the ground up, tailored to YOUR system.</p><a
+                                href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="store-btn btn-red">Buy
+                                Now</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i>Best pc resources free up</li>
+                                    <li><i class="fas fa-check"></i> Advanced Cleaning</li>
+                                    <li><i class="fas fa-check"></i> Full & Hidden Tweaks</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('Elite', ['/static/Assets/lynxpremium.png'])">Learn More <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="store-card red-theme">
+                            <h3>Lynx opt v.2</h3>
+                            <div class="store-price">₹180<span class="currency">INR</span><span class="time"><i
+                                        class="far fa-clock"></i> Lifetime</span></div>
+                            <p class="store-desc">A great base for any setup at an affordable price.</p><a
+                                href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="store-btn btn-red">Buy
+                                Now</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Improved FPS & Stability</li>
+                                    <li><i class="fas fa-check"></i> Lower Input Delay</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('Foundation', ['/static/Assets/lynxv.2.png'])">Learn More <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="store-card red-theme">
+                            <h3>Manual Optimization</h3>
+                            <div class="store-price">₹400<span class="currency">INR</span></div>
+                            <p class="store-desc">We will manually optimize your system to its max performance.</p><a
+                                href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="store-btn btn-red">Buy
+                                Now</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Update Windows Accidentally</li>
+                                    <li><i class="fas fa-check"></i> Fix Tweaking Conflicts</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('PC optimization', ['/static/Assets/optimization.png'])">Learn More <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="store-category-row">
+                    <div class="cat-label label-purple">Basic</div>
+                    <h2 class="cat-title">Basic Services</h2>
+                    <div class="store-grid">
+                        <div class="store-card purple-theme">
+                            <h3>SOON..</h3>
+                            <div class="store-price">₹99 <span class="currency">INR</span></div>
+                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
+                                class="store-btn btn-purple">Pre - register</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('??', ['https://via.placeholder.com/800x450/220022/ffffff?text=OC+Bundle+SS'])">Learn
+                                More <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="store-card purple-theme">
+                            <h3>SOON..</h3>
+                            <div class="store-price">₹100 <span class="currency">INR</span></div>
+                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
+                                class="store-btn btn-purple">Pre - register</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('??', ['https://via.placeholder.com/800x450/330033/ffffff?text=RAM+SS'])">Learn
+                                More <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="store-card purple-theme">
+                            <h3>SOON..</h3>
+                            <div class="store-price">₹90 <span class="currency">INR</span></div>
+                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
+                                class="store-btn btn-purple">Pre - register</a>
+                            <div class="store-features">
+                                <p>Features:</p>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                    <li><i class="fas fa-check"></i> soon.</li>
+                                </ul>
+                            </div><button class="store-learn-more"
+                                onclick="openModal('??', ['https://via.placeholder.com/800x450/440044/ffffff?text=CPU+SS'])">Learn
+                                More <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+
+
+    <div id="image-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h2 id="modal-title">Service Name</h2>
+            <div class="modal-gallery">
+                <button class="nav-btn prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="img-container"><img id="modal-img" src="" alt="Screenshot"></div>
+                <button class="nav-btn next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="modal-actions">
+                <a href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-gold modal-buy-btn">Buy Now on
+                    Discord <i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="{{ url_for('static', path='script.js') }}"></script>
+    <script src="{{ url_for('static', path='services.js') }}"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".timeline-item"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+        });
+    </script>
+</body>
+
+</html>
