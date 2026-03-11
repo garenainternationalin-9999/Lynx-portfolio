@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <style>
+        * {
+            cursor: url('/static/Assets/cursor.png'), auto;
+        }
+
+        a,
+        button,
+        .nav-pill,
+        .btn,
+        .diary-paper,
+        .float-card,
+        .paragon-card,
+        .nightmare-card,
+        .skill-creative-card {
+            cursor: url('/static/Assets/cursor.png'), pointer !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -717,3 +734,5 @@
 </body>
 
 </html>
+
+
