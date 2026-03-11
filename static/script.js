@@ -207,6 +207,22 @@ let conversationHistory = [
 ];
 
 function initLynxAssistant() {
+    const chatToggleBtn = document.getElementById('chat-toggle-btn');
+    const closeChatBtn = document.getElementById('close-chat-btn');
+    const chatPopup = document.getElementById('chat-popup');
+
+    if (chatToggleBtn && chatPopup) {
+        chatToggleBtn.addEventListener('click', () => {
+            chatPopup.classList.toggle('active');
+        });
+    }
+
+    if (closeChatBtn && chatPopup) {
+        closeChatBtn.addEventListener('click', () => {
+            chatPopup.classList.remove('active');
+        });
+    }
+
     if (!chatInput || !chatSendBtn) return;
 
     chatSendBtn.addEventListener('click', handleUserMessage);
