@@ -45,7 +45,7 @@ async def chat(request: Request):
                 "Content-Type": "application/json"
             },
             json={
-                "model": "llama3-8b-8192", 
+                "model": "llama-3.3-70b-versatile", 
                 "messages": full_messages,
                 "temperature": 0.7,
                 "max_tokens": 300
@@ -53,16 +53,16 @@ async def chat(request: Request):
         )
         
         if response.status_code != 200:
-             return JSONResponse({"error": "The neural link experienced instability."}, status_code=500)
+             return JSONResponse({"error": f"The neural link experienced instability. (Status: {response.status_code}, Body: {response.text})"}, status_code=500)
 
         groq_data = response.json()
         if groq_data and "choices" in groq_data and len(groq_data["choices"]) > 0:
             return JSONResponse({"reply": groq_data["choices"][0]["message"]["content"]})
         else:
-            return JSONResponse({"error": "The neural link experienced instability."}, status_code=500)
+            return JSONResponse({"error": f"The neural link experienced instability. (Data: {groq_data})"}, status_code=500)
 
     except Exception as e:
-        return JSONResponse({"error": "Connection to mainframe failed."}, status_code=500)
+        return JSONResponse({"error": f"Connection to mainframe failed: {str(e)}"}, status_code=500)
 
 if __name__ == "__main__":
     import uvicorn
