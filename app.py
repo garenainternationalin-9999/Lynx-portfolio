@@ -13,7 +13,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = "os.getenv("GROK_API_KEY")
 
 SYSTEM_PROMPT = """You are "Lynx Assistant", an exclusive AI created by the developer LYNX to help visitors navigate his portfolio.
 You are a confident, highly intelligent, slightly cyberpunk-themed assistant.
