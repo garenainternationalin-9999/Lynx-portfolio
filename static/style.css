@@ -224,6 +224,7 @@ body {
 .red-text {
     background: linear-gradient(180deg, #ff4d4d, #990000);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -443,9 +444,17 @@ body {
     box-shadow: 0 0 10px rgba(255, 183, 0, 0.4);
 }
 
-.card-content { text-align: center; }
+.card-content { text-align: center; display: flex; flex-direction: column; gap: 15px; }
+.project-lang-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 5px; }
+.project-lang-tag { display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 14px; border-radius: 10px; backdrop-filter: blur(4px); transition: all 0.3s ease; }
+.project-lang-tag:hover { background: rgba(217, 35, 35, 0.1); border-color: rgba(217, 35, 35, 0.3); transform: translateY(-2px); }
+.project-lang-tag img { width: 18px; height: 18px; object-fit: contain; }
+.project-lang-tag span { color: #fff; font-size: 0.8rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.always-show-features { text-align: left; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; background: rgba(255, 255, 255, 0.02); }
+.feature-title { font-size: 0.9rem; font-weight: 700; color: #888; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.feature-title i { color: var(--accent-red); }
 .price-tag { font-family: 'JetBrains Mono', monospace; color: #fff; font-size: 1.1rem; margin-bottom: 5px; font-weight: 700; }
-.dev-tag { color: #888; font-size: 0.85rem; margin-bottom: 20px; }
+.dev-tag { color: #888; font-size: 0.85rem; }
 
 .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
 .btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; cursor: pointer; }
