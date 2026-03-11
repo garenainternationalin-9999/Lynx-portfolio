@@ -16,23 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-    <style>
-        * {
-            cursor: url('/static/Assets/cursor.png'), auto;
-        }
-
-        a,
-        button,
-        .nav-pill,
-        .btn,
-        .diary-paper,
-        .float-card,
-        .paragon-card,
-        .nightmare-card,
-        .skill-creative-card {
-            cursor: url('/static/Assets/cursor.png'), pointer !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -119,19 +102,89 @@
 
             <div class="floating-marquee">
                 <div class="marquee-track">
-                    {% for review in reviews %}
+
+
                     <div class="float-card">
                         <div class="float-img">
-                            <img src="{{ url_for('static', path='review/' + review.img) }}" alt="Preview">
+                            <img src="{{ url_for('static', path='review/review8.png') }}" alt="Preview">
                         </div>
                         <div class="float-info">
                             <span class="float-name">@Service review.</span>
                             <div class="float-rating">
-                                <i class="fa-solid fa-star"></i> {{ review.rating }}
+                                <i class="fa-solid fa-star"></i> 5.0
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review7.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 4.9
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review6.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img">
+                            <img src="{{ url_for('static', path='review/review5.png') }}" alt="Preview">
+                        </div>
+                        <div class="float-info">
+                            <span class="float-name">@Service review.</span>
+                            <div class="float-rating">
+                                <i class="fa-solid fa-star"></i> 5.0
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review1.png') }}"
+                                alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review2.png') }}"
+                                alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 4.9</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review3.png') }}"
+                                alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+                        </div>
+                    </div>
+                    <div class="float-card">
+                        <div class="float-img"><img src="{{ url_for('static', path='review/review4.png') }}"
+                                alt="Preview"></div>
+                        <div class="float-info"><span class="float-name">@Service review.</span>
+                            <div class="float-rating"><i class="fa-solid fa-star"></i> 5.0</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -435,81 +488,192 @@
                 <header class="service-header">
                     <h1 class="brand-title" style="font-size: 3rem;">MAIN <span class="outline-text">PROJECTS</span>
                     </h1>
+                    <p class="service-subtitle">Here are my projects which i created in my journey</p>
                 </header>
                 <section class="tools-grid">
-                    {% for project in main_projects %}
+
                     <div class="paragon-card">
-                        {% if project.featured %}<div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>{% endif %}
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
                         <div class="card-header">
-                            <i class="{{ project.icon }}"></i>
-                            <h2>{{ project.title }}</h2>
+                            <i class="fa-brands fa-discord"></i>
+                            <h2>PrimeX discord bot</h2>
                         </div>
                         <div class="card-content">
                             <div class="project-lang-tags">
-                                {% for lang in project.languages %}
                                 <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/' + lang.img) }}" alt="{{ lang.name }}">
-                                    <span>{{ lang.name }}</span>
+                                    <img src="{{ url_for('static', path='Assets/Python.webp') }}" alt="Python">
+                                    <span>Python</span>
                                 </div>
-                                {% endfor %}
                             </div>
                             <div class="btn-group">
-                                <a href="{{ project.link }}" target="_blank" class="btn btn-primary">
-                                    <i class="fa-solid {% if 'bot' in project.title.lower() %}fa-plus{% else %}fa-link{% endif %}"></i> {{ project.link_text }}
+                                <a href="https://discord.com/oauth2/authorize?client_id=1469585966347059365"
+                                    target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-plus"></i> Invite Bot
                                 </a>
                             </div>
                             <div class="project-description-text">
-                                {{ project.desc }}
+                                A powerful, feature-rich Discord bot designed for ultimate server management and
+                                entertainment.
                             </div>
                             <div class="always-show-features">
-                                <div class="feature-title"><i class="fa-solid fa-list-ul"></i> {{ project.feature_title }}</div>
+                                <div class="feature-title"><i class="fa-solid fa-list-ul"></i> DESCRIPTION</div>
                                 <div class="feature-list">
-                                    {% for feature in project.features %}
-                                    <div class="f-item"><i class="{{ feature.icon }}"></i> {{ feature.text }}</div>
-                                    {% endfor %}
+                                    <div class="f-item"><i class="fa-solid fa-shield"></i> Advance security</div>
+                                    <div class="f-item"><i class="fa-solid fa-music"></i> Premium music</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+
+                    <div class="paragon-card">
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        <div class="card-header">
+                            <i class="fa-solid fa-shield-halved icon-red"></i>
+                            <h2>LYNX AUTH</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-lang-tags">
+                                <div class="project-lang-tag">
+                                    <img src="{{ url_for('static', path='Assets/Python.webp') }}" alt="Python">
+                                    <span>Python</span>
+                                </div>
+                                <div class="project-lang-tag">
+                                    <img src="{{ url_for('static', path='Assets/node.png') }}" alt="JS">
+                                    <span>JS</span>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <a href="https://lynxauth.qzz.io/" target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-link"></i> View Project
+                                </a>
+                            </div>
+                            <div class="project-description-text">
+                                A secure and robust authentication system for applications, featuring real-time
+                                monitoring and HWID locking.
+                            </div>
+                            <div class="always-show-features">
+                                <div class="feature-title"><i class="fa-solid fa-lock"></i> SECURITY</div>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-fingerprint"></i> HWID Verification</div>
+                                    <div class="f-item"><i class="fa-solid fa-cloud"></i> Real-time Dashboard</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paragon-card">
+                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        <div class="card-header">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <h2>Portfolio Website</h2>
+                        </div>
+                        <div class="card-content">
+                            <div class="project-lang-tags">
+                                <div class="project-lang-tag">
+                                    <img src="{{ url_for('static', path='Assets/html.png') }}" alt="HTML">
+                                    <span>HTML</span>
+                                </div>
+                                <div class="project-lang-tag">
+                                    <img src="{{ url_for('static', path='Assets/css.png') }}" alt="CSS">
+                                    <span>CSS</span>
+                                </div>
+                                <div class="project-lang-tag">
+                                    <img src="{{ url_for('static', path='Assets/node.png') }}" alt="JS">
+                                    <span>JS</span>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <a href="#" target="_blank" class="btn btn-primary">
+                                    <i class="fa-solid fa-link"></i> View Project
+                                </a>
+                            </div>
+                            <div class="project-description-text">
+                                My personal portfolio website designed with a premium, dark-themed aesthetic and
+                                high-performance animations.
+                            </div>
+                            <div class="always-show-features">
+                                <div class="feature-title"><i class="fa-solid fa-star"></i> HIGHLIGHTS</div>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-heart"></i> The project closest to me.
+                                    </div>
+                                    <div class="f-item"><i class="fa-solid fa-circle-user"></i> About my everything.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </section>
 
                 <header class="service-header" style="margin-top: 4rem;">
                     <h1 class="brand-title" style="font-size: 3rem;">EXTRA<span class="outline-text">PROJECTS</span>
                     </h1>
+                    <p class="service-subtitle">Some extra projects , created for fun 😅</p>
                 </header>
                 <section class="tools-grid">
-                    {% for project in extra_projects %}
-                    <div class="{{ project.type }}-card {% if project.btn_class == 'btn-gold' %}premium-border{% endif %}">
-                        <div class="{% if project.type == 'nightmare' %}beta-badge{% else %}badge-opensource{% endif %}">
-                            <i class="{{ project.badge_icon if project.badge_icon else '' }}"></i> {{ project.badge }}
-                        </div>
-                        <div class="card-header">
-                            <i class="{{ project.icon }}"></i>
-                            <h2 class="{% if project.type == 'nightmare' %}nightmare-title{% endif %}">{{ project.title }}</h2>
-                            {% if project.sub %}<span class="ghost-sub">{{ project.sub }}</span>{% endif %}
+
+
+                    <div class="paragon-card premium-border">
+                        <div class="badge-opensource"><i class="fa-solid fa-code-branch"></i> Open Source</div>
+                        <div class="card-header"><i class="fas fa-bolt icon-gold"></i>
+                            <h2>SERVER CLONER</h2>
                         </div>
                         <div class="card-content">
-                            <p class="dev-tag" style="{% if project.type == 'nightmare' %}color: #8a7ab0;{% endif %}">{{ project.desc }}</p>
-                            <div class="btn-group">
-                                <a href="{{ project.link }}" {% if 'download' in project.link_text.lower() %}download{% endif %} class="btn {{ project.btn_class }}">
-                                    <i class="{% if 'download' in project.link_text.lower() %}fas fa-download{% else %}fa-solid fa-cloud{% endif %}"></i> {{ project.link_text }}
-                                </a>
-                                <a href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary">
-                                    <i class="fab fa-discord"></i> Support
-                                </a>
-                            </div>
-                            <div class="always-show-features {% if project.type == 'nightmare' %}nightmare-details{% endif %}">
-                                <div class="feature-title"><i class="fa-solid {% if project.type == 'nightmare' %}fa-dna{% else %}fa-star{% endif %}"></i> {% if project.type == 'nightmare' %}Core Features{% else %}Premium Features{% endif %}</div>
+                            <p class="price-tag" style="color: #ffd766;">Free</p>
+                            <p class="dev-tag">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="https://discord.gg/Sz5ZGfk3GX" class="btn btn-gold"><i
+                                        class="fa-solid fa-download"></i> Download</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <div class="always-show-features">
+                                <div class="feature-title"><i class="fa-solid fa-star"></i> Premium Features</div>
                                 <div class="feature-list">
-                                    {% for feature in project.features %}
-                                    <div class="f-item"><i class="{{ feature.icon }}"></i> {{ feature.text }}</div>
-                                    {% endfor %}
+                                    <div class="f-item"><i class="fa-solid fa-box-open"></i> Full Open Source</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+
+                    <div class="nightmare-card">
+                        <div class="beta-badge">BETA 0.0</div>
+                        <div class="card-header"><i class="fa-solid fa-ghost"></i>
+                            <h2 class="nightmare-title">NIGHTMARE</h2><span class="ghost-sub">Kernel Level
+                                Spammer</span>
+                        </div>
+                        <div class="card-content">
+                            <p class="price-tag" style="color: #b39cff;">FREE</p>
+                            <p class="dev-tag" style="color: #8a7ab0;">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="services/NIGHTMARE.zip" download
+                                    class="btn nightmare-btn"><i class="fas fa-download"></i> Download</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <div class="always-show-features nightmare-details">
+                                <div class="feature-title"><i class="fa-solid fa-dna"></i> Core Features</div>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-robot"></i> Self Bot Spammer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paragon-card">
+                        <div class="card-header"><i class="fa-solid fa-cloud icon-red"></i>
+                            <h2>DM PROMO BOT</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="price-tag">FREE</p>
+                            <p class="dev-tag">Dev: LYNX 🟢</p>
+                            <div class="btn-group"><a href="https://dm-bot-web-service.onrender.com/"
+                                    class="btn btn-primary"><i class="fa-solid fa-cloud"></i> Run Now</a><a
+                                    href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="btn btn-secondary"><i
+                                        class="fab fa-discord"></i> Support</a></div>
+                            <div class="always-show-features">
+                                <div class="feature-title"><i class="fa-solid fa-server"></i> Features & Info</div>
+                                <div class="feature-list">
+                                    <div class="f-item"><i class="fa-solid fa-bolt"></i> Fast & Reliable</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
@@ -702,9 +866,24 @@
             "max-glare": 0.2,
         });
 
-        const thoughts = {{ diary.thoughts | tojson }};
-        const goals = {{ diary.goals | tojson }};
-        const feelings = {{ diary.feelings | tojson }};
+        const thoughts = [
+            "Code is like poetry; most people don't understand it.",
+            "Stability is not just code, it's a mindset.",
+            "Building the future, one line at a time.",
+            "Efficiency is the ultimate sophistication."
+        ];
+        const goals = [
+            "Mastering decentralized intelligence.",
+            "Reaching 100k+ active users on PrimeX.",
+            "Developing a full-scale BOT.",
+            "Optimizing every millisecond of performance."
+        ];
+        const feelings = [
+            "Fueled by dark mode and caffeine.",
+            "Determined to break the simulation.",
+            "Feeling the aura of peak development.",
+            "Syncing with the mainframe..."
+        ];
 
         function updateCyclingText(id, array) {
             const el = document.getElementById(id);
@@ -734,6 +913,3 @@
 </body>
 
 </html>
-
-
-
