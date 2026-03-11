@@ -2641,3 +2641,157 @@ body {
         flex-direction: column;
     }
 }
+.aura-diary-section {
+    padding: 100px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    background: radial-gradient(circle at center, rgba(60, 30, 20, 0.1) 0%, transparent 70%);
+}
+
+.diary-container {
+    width: 100%;
+    max-width: 800px;
+    perspective: 1000px;
+}
+
+.diary-paper {
+    background: #f4ecd8;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 0%, transparent 100%),
+        url("https://www.transparenttextures.com/patterns/pinstriped-suit.png");
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 
+        10px 10px 40px rgba(0,0,0,0.7),
+        inset 0 0 100px rgba(139, 69, 19, 0.1),
+        inset 0 0 20px rgba(139, 69, 19, 0.2);
+    position: relative;
+    border-left: 20px solid #5d4037;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.diary-paper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(225deg, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.05) 50%, transparent 55%);
+    pointer-events: none;
+}
+
+.diary-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid rgba(93, 64, 55, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: #5d4037;
+}
+
+.diary-header i {
+    font-size: 1.8rem;
+    color: #8d6e63;
+}
+
+.diary-header h3 {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+}
+
+.diary-date {
+    margin-left: auto;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.diary-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.thought-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.thought-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #a1887f;
+    letter-spacing: 1px;
+}
+
+.thought-text {
+    font-family: "Inter", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #3e2723;
+    min-height: 1.6em;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.diary-footer {
+    padding-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.leather-strap {
+    width: 60px;
+    height: 15px;
+    background: #4e342e;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.leather-strap::after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #d4af37;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.text-changing {
+    animation: textFade 0.5s ease-in-out;
+}
+
+@keyframes textFade {
+    0% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0; transform: translateY(-10px); }
+    51% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 600px) {
+    .diary-paper {
+        padding: 25px;
+    }
+    .thought-text {
+        font-size: 1.1rem;
+    }
+}
+
