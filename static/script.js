@@ -221,7 +221,80 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(fetchDiscordStatus, 6000);
     initLynxAssistant();
     initReviews();
+    initGamesLibrary();
 });
+
+async function initGamesLibrary() {
+    const root = document.getElementById('games-library-root');
+    if (!root) return;
+
+    try {
+        const response = await fetch('/static/games_lib.json');
+        const data = await response.json();
+
+        const calculateHours = (base, date) => {
+            const installDate = new Date(date);
+            const now = new Date();
+            const diffDays = Math.floor((now - installDate) / (1000 * 60 * 60 * 24));
+            return base + diffDays;
+        };
+
+        const fav = data.favorite_game;
+        const favHours = calculateHours(fav.hours_played_base, fav.install_date);
+
+        let html = `
+            <div class="fav-game-card" data-aos="fade-right">
+                <div class="fav-badge">FAVOURITE GAME</div>
+                <div class="fav-game-visual">
+                    <img src="${fav.image}" alt="${fav.title}">
+                    <div class="fav-overlay"></div>
+                </div>
+                <div class="fav-game-info">
+                    <h3>${fav.title}</h3>
+                    <p>${fav.description}</p>
+                    <div class="fav-stats">
+                        <div class="fav-stat">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>${favHours} HRS PLAYED</span>
+                        </div>
+                        <div class="fav-stat">
+                            <i class="fa-solid fa-star"></i>
+                            <span>MASTERED</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="games-grid">
+        `;
+
+        data.library.forEach(game => {
+            const hours = calculateHours(game.hours_played_base, game.install_date);
+            html += `
+                <div class="game-item-card" data-aos="fade-up">
+                    <div class="game-cover">
+                        <img src="${game.image}" alt="${game.title}">
+                        <div class="game-status-tag">${game.status}</div>
+                    </div>
+                    <div class="game-details">
+                        <h4>${game.title}</h4>
+                        <div class="game-playtime">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>${hours}h played</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+        root.innerHTML = html;
+
+    } catch (error) {
+        console.error("Games library error:", error);
+        root.innerHTML = '<p class="error-msg">Mainframe connection lost. Games library offline.</p>';
+    }
+}
 
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
