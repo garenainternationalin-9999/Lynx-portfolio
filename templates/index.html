@@ -17,6 +17,14 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <style>
+        * {
+            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0, auto !important;
+        }
+        a, button, [role="button"], .nav-pill, .btn, .hamburger-menu, .chat-toggle-trigger {
+            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0, pointer !important;
+        }
+    </style>
 </head>
 
 <body>
