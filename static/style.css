@@ -2983,3 +2983,184 @@ body {
     .why-us-description { margin: 0 auto; }
 }
 
+/* --- Games Library Styles --- */
+.games-library-root {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.library-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 60px;
+    color: var(--text-gray);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.fav-game-card {
+    display: flex;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.fav-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--accent-red);
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-weight: 900;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(217, 35, 35, 0.4);
+}
+
+.fav-game-visual {
+    flex: 0 0 50%;
+    position: relative;
+    height: 350px;
+}
+
+.fav-game-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.fav-game-card:hover .fav-game-visual img {
+    transform: scale(1.05);
+}
+
+.fav-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(6, 6, 6, 0.8) 100%);
+}
+
+.fav-game-info {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fav-game-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+}
+
+.fav-game-info p {
+    color: var(--text-gray);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.fav-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.fav-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.fav-stat i { color: var(--accent-red); }
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.game-item-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.game-item-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.game-cover {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.game-item-card:hover .game-cover img {
+    transform: scale(1.1);
+}
+
+.game-status-tag {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-red);
+}
+
+.game-details {
+    padding: 15px;
+}
+
+.game-details h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.game-playtime {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+@media(max-width: 800px) {
+    .fav-game-card { flex-direction: column; }
+    .fav-game-visual { height: 250px; flex: none; }
+    .fav-overlay { background: linear-gradient(0deg, rgba(6, 6, 6, 0.9) 0%, transparent 100%); }
+    .fav-game-info { padding: 30px; }
+}
+
