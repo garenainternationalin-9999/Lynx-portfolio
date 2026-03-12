@@ -143,6 +143,23 @@
                 <div class="reviews-grid" id="google-reviews-container">
                 </div>
             </section>
+
+            <section class="live-views-section">
+                <div class="live-views-card">
+                    <div class="live-views-pulse"></div>
+                    <div class="live-views-icon">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="live-views-info">
+                        <span class="live-views-label">TOTAL SITE VIEWS</span>
+                        <span class="live-views-count" id="live-view-count">0</span>
+                    </div>
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span class="live-text">LIVE</span>
+                    </div>
+                </div>
+            </section>
         </div>
 
 
@@ -797,6 +814,53 @@
             once: true,
             offset: 100
         });
+
+        function animateViewCount(target) {
+            const el = document.getElementById('live-view-count');
+            if (!el) return;
+            const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
+            if (current === target) return;
+            const duration = 1000;
+            const steps = 60;
+            const increment = (target - current) / steps;
+            let step = 0;
+            const timer = setInterval(() => {
+                step++;
+                const value = Math.round(current + increment * step);
+                el.textContent = value.toLocaleString();
+                if (step >= steps) {
+                    clearInterval(timer);
+                    el.textContent = target.toLocaleString();
+                }
+            }, duration / steps);
+        }
+
+        function connectViewsWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const ws = new WebSocket(protocol + '//' + window.location.host + '/ws/views');
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (data.total_views !== undefined) {
+                    animateViewCount(data.total_views);
+                }
+            };
+            ws.onclose = function() {
+                setTimeout(connectViewsWebSocket, 3000);
+            };
+            ws.onerror = function() {
+                ws.close();
+            };
+        }
+
+        fetch('/api/views')
+            .then(r => r.json())
+            .then(data => {
+                if (data.total_views !== undefined) {
+                    animateViewCount(data.total_views);
+                }
+            })
+            .catch(() => {});
+        connectViewsWebSocket();
     </script>
 </body>
 
