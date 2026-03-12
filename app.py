@@ -8,13 +8,18 @@ import os
 import json
 import asyncio
 from dotenv import load_dotenv
+import certifi
 
 load_dotenv()
 
 app = FastAPI()
 
 MONGO_URL = os.getenv("MONGO_URL")
-client = AsyncIOMotorClient(MONGO_URL)
+client = AsyncIOMotorClient(
+    MONGO_URL,
+    tls=True,
+    tlsCAFile=certifi.where()
+)
 db = client["lynx_database"]
 stats_collection = db["stats"]
 
