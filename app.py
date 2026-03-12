@@ -15,7 +15,6 @@ load_dotenv()
 app = FastAPI()
 
 
-# --- FIREBASE SETUP ---
 env_creds = os.getenv("SERVICE_ACCOUNT_JSON")
 
 try:
@@ -74,9 +73,18 @@ async def broadcast_stats():
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    stats_ref.update({
-    "total_views": firestore.Increment(1)
-    })
+    doc = stats_ref.get()
+
+    if not doc.exists:
+        stats_ref.set({
+            "total_views": 1,
+            "total_likes": 0
+        })
+    else:
+        stats_ref.update({
+            "total_views": firestore.Increment(1)
+        })
+
     asyncio.create_task(broadcast_stats())
     return templates.TemplateResponse("index.html", {"request": request})
 
