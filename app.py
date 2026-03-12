@@ -17,6 +17,11 @@ app = FastAPI()
 
 Service_accounts = os.getenv("Service_accounts")
 
+if not Service_accounts:
+    raise RuntimeError("Service_accounts environment variable not found")
+
+Service_accounts = Service_accounts.replace("\\n", "\n")
+
 cred = credentials.Certificate(json.loads(Service_accounts))
 firebase_admin.initialize_app(cred)
 
