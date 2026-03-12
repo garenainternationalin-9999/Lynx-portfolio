@@ -184,10 +184,43 @@ async function fetchDiscordStatus() {
     }
 }
 
+async function initReviews() {
+    const reviewsContainer = document.getElementById('google-reviews-container');
+    if (!reviewsContainer) return;
+
+    try {
+        const response = await fetch('/Reviws.json');
+        const reviews = await response.json();
+
+        reviewsContainer.innerHTML = reviews.map(review => `
+            <div class="google-review-card" data-aos="fade-up">
+                <div class="review-header">
+                    <img src="${review.pfp}" alt="${review.name}" class="review-pfp">
+                    <div class="review-meta">
+                        <span class="review-author">${review.name}</span>
+                        <div class="review-stars">
+                            ${Array(5).fill(0).map((_, i) => `<i class="fa-solid fa-star ${i < review.stars ? 'active' : ''}"></i>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                <p class="review-text">${review.content}</p>
+                <div class="google-logo-mini">
+                    <i class="fa-brands fa-google"></i>
+                    <span>Verified</span>
+                </div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error("Error loading reviews:", error);
+        reviewsContainer.innerHTML = '<p class="error-text">Failed to load reviews mainframe link broken.</p>';
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchDiscordStatus();
     setInterval(fetchDiscordStatus, 6000);
     initLynxAssistant();
+    initReviews();
 });
 
 const chatMessages = document.getElementById('chat-messages');
