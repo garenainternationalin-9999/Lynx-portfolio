@@ -15,9 +15,9 @@ load_dotenv()
 app = FastAPI()
 
 
-firebase_key = os.getenv("FIREBASE_KEY")
+Service_accounts = os.getenv("Service_accounts")
 
-cred = credentials.Certificate(json.loads(firebase_key))
+cred = credentials.Certificate(json.loads(Service_accounts))
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
