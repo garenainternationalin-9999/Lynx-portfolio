@@ -237,7 +237,18 @@ function initMusicPlayer() {
 
     music.volume = 0.5;
 
-    toggleBtn.addEventListener('click', () => {
+    const playMusic = () => {
+        music.play().then(() => {
+            icon.classList.replace('fa-play', 'fa-pause');
+            musicText.innerText = "PAUSE BGM";
+            document.removeEventListener('click', playMusic);
+        }).catch(err => console.log("Autoplay blocked, waiting for interaction"));
+    };
+
+    document.addEventListener('click', playMusic);
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (music.paused) {
             music.play();
             icon.classList.replace('fa-play', 'fa-pause');
@@ -264,7 +275,7 @@ function initCustomCursor() {
 
         setTimeout(() => {
             ripple.remove();
-        }, 600);
+        }, 800);
     });
 }
 
