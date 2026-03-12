@@ -34,8 +34,6 @@ try:
 except Exception as e:
     raise RuntimeError(f"Firebase initialization failed: {e}")
 
-db = firestore.client()
-stats_ref = db.collection("stats").document("site_stats")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
