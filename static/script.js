@@ -189,7 +189,7 @@ async function initReviews() {
     if (!reviewsContainer) return;
 
     try {
-        const response = await fetch('/Reviws.json');
+        const response = await fetch('/static/Reviws.json');
         const reviews = await response.json();
 
         reviewsContainer.innerHTML = reviews.map(review => `
