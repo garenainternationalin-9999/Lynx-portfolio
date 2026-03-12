@@ -2475,6 +2475,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.lynx-chat-popup .chat-messages::-webkit-scrollbar {
+    display: none;
 }
 
 .lynx-chat-popup .chat-input-area {
@@ -3162,7 +3168,7 @@ body {
 }
 
 * {
-    cursor: url('/static/Assets/cursor.webp'), auto !important;
+    cursor: url('/static/Assets/cursor.webp'), none !important;
 }
 
 .click-ripple {
