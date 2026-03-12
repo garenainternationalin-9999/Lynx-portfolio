@@ -2,26 +2,26 @@ from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from motor.motor_asyncio import AsyncIOMotorClient
 import requests
 import os
 import json
 import asyncio
 from dotenv import load_dotenv
-import certifi
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 load_dotenv()
 
 app = FastAPI()
 
-MONGO_URL = os.getenv("MONGO_URL")
-client = AsyncIOMotorClient(
-    MONGO_URL,
-    tls=True,
-    tlsCAFile=certifi.where()
-)
-db = client["lynx_database"]
-stats_collection = db["stats"]
+
+firebase_key = os.getenv("FIREBASE_KEY")
+
+cred = credentials.Certificate(json.loads(firebase_key))
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
+stats_ref = db.collection("stats").document("site_stats")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -31,11 +31,16 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 connected_clients = set()
 
 async def get_current_stats():
-    stats = await stats_collection.find_one({"_id": "site_stats"})
-    if not stats:
-        stats = {"_id": "site_stats", "total_views": 0, "total_likes": 0}
-        await stats_collection.insert_one(stats)
-    return stats
+    doc = stats_ref.get()
+
+    if not doc.exists:
+        stats_ref.set({
+            "total_views": 0,
+            "total_likes": 0
+        })
+        return {"total_views": 0, "total_likes": 0}
+
+    return doc.to_dict()
 
 async def broadcast_stats():
     stats = await get_current_stats()
@@ -57,11 +62,9 @@ async def broadcast_stats():
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    await stats_collection.update_one(
-        {"_id": "site_stats"},
-        {"$inc": {"total_views": 1}},
-        upsert=True
-    )
+    stats_ref.update({
+    "total_views": firestore.Increment(1)
+    })
     asyncio.create_task(broadcast_stats())
     return templates.TemplateResponse("index.html", {"request": request})
 
@@ -75,11 +78,10 @@ async def get_views_api():
 
 @app.post("/api/like")
 async def add_like():
-    await stats_collection.update_one(
-        {"_id": "site_stats"},
-        {"$inc": {"total_likes": 1}},
-        upsert=True
-    )
+    stats_ref.update({
+        "total_likes": firestore.Increment(1)
+    })
+
     await broadcast_stats()
     return JSONResponse({"status": "success"})
 
