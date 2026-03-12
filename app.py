@@ -15,15 +15,24 @@ load_dotenv()
 app = FastAPI()
 
 
-Service_accounts = os.getenv("Service_accounts")
+# --- FIREBASE SETUP ---
+env_creds = os.getenv("SERVICE_ACCOUNT_JSON")
 
-if not Service_accounts:
-    raise RuntimeError("Service_accounts environment variable not found")
+try:
+    if env_creds:
+        cred_dict = json.loads(env_creds)
+        cred = credentials.Certificate(cred_dict)
+    else:
+        cred = credentials.Certificate("serviceAccountKey.json")
 
-Service_accounts = Service_accounts.replace("\\n", "\n")
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
 
-cred = credentials.Certificate(json.loads(Service_accounts))
-firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    stats_ref = db.collection("stats").document("site_stats")
+
+except Exception as e:
+    raise RuntimeError(f"Firebase initialization failed: {e}")
 
 db = firestore.client()
 stats_ref = db.collection("stats").document("site_stats")
