@@ -3167,13 +3167,6 @@ body {
     .fav-game-info { padding: 30px; }
 }
 
-* {
-    cursor: url('Assets/cursor.webp'), auto !important;
-}
-
-a, button, .nav-pill, .btn, [role="button"], .hamburger-menu, .chat-toggle-trigger {
-    cursor: url('Assets/cursor.webp'), pointer !important;
-}
 
 .click-ripple {
     position: fixed;
