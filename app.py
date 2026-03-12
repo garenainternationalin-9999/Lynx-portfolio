@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from motor.motor_asyncio import AsyncIOMotorClient
 import requests
 import os
 import json
@@ -12,35 +13,88 @@ load_dotenv()
 
 app = FastAPI()
 
+MONGO_URL = os.getenv("MONGO_URL")
+client = AsyncIOMotorClient(MONGO_URL)
+db = client["lynx_database"]
+stats_collection = db["stats"]
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-VIEWS_FILE = "views.json"
-
-def load_views():
-    try:
-        with open(VIEWS_FILE, "r") as f:
-            data = json.load(f)
-            return data.get("total_views", 0)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return 0
-
-def save_views(count):
-    with open(VIEWS_FILE, "w") as f:
-        json.dump({"total_views": count}, f)
-
 connected_clients = set()
 
-async def broadcast_views(count):
+async def get_current_stats():
+    stats = await stats_collection.find_one({"_id": "site_stats"})
+    if not stats:
+        stats = {"_id": "site_stats", "total_views": 0, "total_likes": 0}
+        await stats_collection.insert_one(stats)
+    return stats
+
+async def broadcast_stats():
+    stats = await get_current_stats()
+    data = {
+        "total_views": stats.get("total_views", 0),
+        "total_likes": stats.get("total_likes", 0)
+    }
+    
+    if not connected_clients:
+        return
+
     disconnected = set()
     for ws in connected_clients:
         try:
-            await ws.send_json({"total_views": count})
+            await ws.send_json(data)
         except Exception:
             disconnected.add(ws)
     connected_clients.difference_update(disconnected)
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    await stats_collection.update_one(
+        {"_id": "site_stats"},
+        {"$inc": {"total_views": 1}},
+        upsert=True
+    )
+    asyncio.create_task(broadcast_stats())
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/api/views")
+async def get_views_api():
+    stats = await get_current_stats()
+    return JSONResponse({
+        "total_views": stats.get("total_views", 0),
+        "total_likes": stats.get("total_likes", 0)
+    })
+
+@app.post("/api/like")
+async def add_like():
+    await stats_collection.update_one(
+        {"_id": "site_stats"},
+        {"$inc": {"total_likes": 1}},
+        upsert=True
+    )
+    await broadcast_stats()
+    return JSONResponse({"status": "success"})
+
+@app.websocket("/ws/views")
+async def websocket_views(websocket: WebSocket):
+    await websocket.accept()
+    connected_clients.add(websocket)
+    try:
+        stats = await get_current_stats()
+        await websocket.send_json({
+            "total_views": stats.get("total_views", 0),
+            "total_likes": stats.get("total_likes", 0)
+        })
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        connected_clients.discard(websocket)
+    except Exception:
+        connected_clients.discard(websocket)
+
 
 SYSTEM_PROMPT = """You are "Lynx Assistant", an exclusive AI created by the developer LYNX to help visitors navigate his portfolio.
 You are a confident, highly intelligent, slightly cyberpunk-themed assistant.
@@ -50,38 +104,13 @@ Crucial constraints:
 - His projects include: PrimeX Discord Bot (Advanced security & music), LYNX AUTH (HWID Verification), And his pro.
 - Keep responses concise, helpful, and stylistically matched to a dark-theme coding portfolio website."""
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    current_views = load_views() + 1
-    save_views(current_views)
-    asyncio.create_task(broadcast_views(current_views))
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@app.get("/api/views")
-async def get_views():
-    return JSONResponse({"total_views": load_views()})
-
-@app.websocket("/ws/views")
-async def websocket_views(websocket: WebSocket):
-    await websocket.accept()
-    connected_clients.add(websocket)
-    try:
-        await websocket.send_json({"total_views": load_views()})
-        while True:
-            await websocket.receive_text()
-    except WebSocketDisconnect:
-        connected_clients.discard(websocket)
-    except Exception:
-        connected_clients.discard(websocket)
-
 @app.post("/api/chat")
 async def chat(request: Request):
     if not GROQ_API_KEY:
-        return JSONResponse({"error": "AI core disconnected. (API Key missing on server)"}, status_code=500)
+        return JSONResponse({"error": "AI core disconnected."}, status_code=500)
 
     data = await request.json()
     messages = data.get("messages", [])
-    
     full_messages = [{"role": "system", "content": SYSTEM_PROMPT}] + messages
 
     try:
@@ -98,20 +127,11 @@ async def chat(request: Request):
                 "max_tokens": 300
             }
         )
-        
-        if response.status_code != 200:
-             return JSONResponse({"error": f"The neural link experienced instability. (Status: {response.status_code}, Body: {response.text})"}, status_code=500)
-
         groq_data = response.json()
-        if groq_data and "choices" in groq_data and len(groq_data["choices"]) > 0:
-            return JSONResponse({"reply": groq_data["choices"][0]["message"]["content"]})
-        else:
-            return JSONResponse({"error": f"The neural link experienced instability. (Data: {groq_data})"}, status_code=500)
-
+        return JSONResponse({"reply": groq_data["choices"][0]["message"]["content"]})
     except Exception as e:
-        return JSONResponse({"error": f"Connection to mainframe failed: {str(e)}"}, status_code=500)
+        return JSONResponse({"error": "Connection to mainframe failed."}, status_code=500)
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
-
