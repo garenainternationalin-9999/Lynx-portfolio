@@ -1,0 +1,32 @@
+{
+    "favorite_game": {
+        "title": "Red Dead Redemption 2",
+        "description": "An epic tale of life in America's unforgiving heartland. The game's vast and atmospheric world also provides the foundation for a brand new online multiplayer experience.",
+        "image": "https://i.ibb.co/KcfJ7Brp/download.jpg",
+        "hours_played_base": 420,
+        "install_date": "2024-01-01T00:00:00Z"
+    },
+    "library": [
+        {
+            "title": "God of War Ragnarök",
+            "image": "https://i.ibb.co/5WvwYM16/header.jpg",
+            "hours_played_base": 85,
+            "install_date": "2024-02-15T00:00:00Z",
+            "status": "Playing"
+        },
+        {
+            "title": "Black myth wukong",
+            "image": "https://i.ibb.co/JwwrrYcC/images.jpg",
+            "hours_played_base": 120,
+            "install_date": "2024-03-01T00:00:00Z",
+            "status": "Active"
+        },
+        {
+            "title": "Valorant",
+            "image": "https://i.ibb.co/tPYqM099/EGS-VALORANT-Riot-Games-S1-2560x1440-e1dab02ef10e4470a609affcfb8f1a1a.jpg",
+            "hours_played_base": 1500,
+            "install_date": "2023-01-01T00:00:00Z",
+            "status": "Competitive"
+        }
+    ]
+}
