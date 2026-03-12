@@ -222,7 +222,51 @@ document.addEventListener("DOMContentLoaded", () => {
     initLynxAssistant();
     initReviews();
     initGamesLibrary();
+    initMusicPlayer();
+    initCustomCursor();
 });
+
+function initMusicPlayer() {
+    const music = document.getElementById('bg-music');
+    const toggleBtn = document.getElementById('music-toggle-btn');
+    const volumeCtrl = document.getElementById('volume-control');
+    const musicText = document.querySelector('.music-text');
+    const icon = toggleBtn.querySelector('i');
+
+    if (!music || !toggleBtn) return;
+
+    music.volume = 0.5;
+
+    toggleBtn.addEventListener('click', () => {
+        if (music.paused) {
+            music.play();
+            icon.classList.replace('fa-play', 'fa-pause');
+            musicText.innerText = "PAUSE BGM";
+        } else {
+            music.pause();
+            icon.classList.replace('fa-pause', 'fa-play');
+            musicText.innerText = "PLAY BGM";
+        }
+    });
+
+    volumeCtrl.addEventListener('input', (e) => {
+        music.volume = e.target.value;
+    });
+}
+
+function initCustomCursor() {
+    window.addEventListener('mousedown', (e) => {
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.left = `${e.clientX}px`;
+        ripple.style.top = `${e.clientY}px`;
+        document.body.appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+}
 
 async function initGamesLibrary() {
     const root = document.getElementById('games-library-root');
