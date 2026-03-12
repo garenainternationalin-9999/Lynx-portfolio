@@ -1,9 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import requests
 import os
+import json
+import asyncio
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,6 +17,31 @@ templates = Jinja2Templates(directory="templates")
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+VIEWS_FILE = "views.json"
+
+def load_views():
+    try:
+        with open(VIEWS_FILE, "r") as f:
+            data = json.load(f)
+            return data.get("total_views", 0)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return 0
+
+def save_views(count):
+    with open(VIEWS_FILE, "w") as f:
+        json.dump({"total_views": count}, f)
+
+connected_clients = set()
+
+async def broadcast_views(count):
+    disconnected = set()
+    for ws in connected_clients:
+        try:
+            await ws.send_json({"total_views": count})
+        except Exception:
+            disconnected.add(ws)
+    connected_clients.difference_update(disconnected)
+
 SYSTEM_PROMPT = """You are "Lynx Assistant", an exclusive AI created by the developer LYNX to help visitors navigate his portfolio.
 You are a confident, highly intelligent, slightly cyberpunk-themed assistant.
 Crucial constraints:
@@ -25,7 +52,27 @@ Crucial constraints:
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
+    current_views = load_views() + 1
+    save_views(current_views)
+    asyncio.create_task(broadcast_views(current_views))
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/api/views")
+async def get_views():
+    return JSONResponse({"total_views": load_views()})
+
+@app.websocket("/ws/views")
+async def websocket_views(websocket: WebSocket):
+    await websocket.accept()
+    connected_clients.add(websocket)
+    try:
+        await websocket.send_json({"total_views": load_views()})
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        connected_clients.discard(websocket)
+    except Exception:
+        connected_clients.discard(websocket)
 
 @app.post("/api/chat")
 async def chat(request: Request):
