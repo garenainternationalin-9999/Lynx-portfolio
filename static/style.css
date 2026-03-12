@@ -3168,7 +3168,11 @@ body {
 }
 
 * {
-    cursor: url('/static/Assets/cursor.webp'), none !important;
+    cursor: url('Assets/cursor.webp'), auto !important;
+}
+
+a, button, .nav-pill, .btn, [role="button"], .hamburger-menu, .chat-toggle-trigger {
+    cursor: url('Assets/cursor.webp'), pointer !important;
 }
 
 .click-ripple {
