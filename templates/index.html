@@ -19,10 +19,19 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     <style>
         * {
-            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0, auto !important;
+            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0,
+            auto !important;
         }
-        a, button, [role="button"], .nav-pill, .btn, .hamburger-menu, .chat-toggle-trigger {
-            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0, pointer !important;
+
+        a,
+        button,
+        [role="button"],
+        .nav-pill,
+        .btn,
+        .hamburger-menu,
+        .chat-toggle-trigger {
+            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0,
+            pointer !important;
         }
     </style>
 </head>
@@ -144,19 +153,39 @@
                 </div>
             </section>
 
-            <section class="live-views-section">
-                <div class="live-views-card">
-                    <div class="live-views-pulse"></div>
-                    <div class="live-views-icon">
-                        <i class="fa-solid fa-eye"></i>
+            <section class="community-stats-container">
+                <div class="stats-glass-card" data-aos="zoom-in">
+                    <div class="card-glow-pulse"></div>
+
+                    <div class="stat-block">
+                        <div class="stat-icon-wrapper views">
+                            <i class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <div class="stat-text">
+                            <span class="stat-label">TOTAL VISITS</span>
+                            <span class="stat-number" id="live-view-count">0</span>
+                        </div>
                     </div>
-                    <div class="live-views-info">
-                        <span class="live-views-label">TOTAL SITE VIEWS</span>
-                        <span class="live-views-count" id="live-view-count">0</span>
+
+                    <div class="stat-separator"></div>
+
+
+                    <div class="stat-block">
+                        <div class="like-button-wrapper">
+                            <button class="aura-like-btn" id="like-btn" onclick="sendLike()">
+                                <i class="fa-solid fa-heart"></i>
+                                <span class="btn-ripple"></span>
+                            </button>
+                        </div>
+                        <div class="stat-text">
+                            <span class="stat-label">COMMUNITY LIKES</span>
+                            <span class="stat-number" id="live-like-count">0</span>
+                        </div>
                     </div>
-                    <div class="live-indicator">
-                        <span class="live-dot"></span>
-                        <span class="live-text">LIVE</span>
+
+                    <div class="live-tag">
+                        <span class="status-blink"></span>
+                        LIVE
                     </div>
                 </div>
             </section>
@@ -815,52 +844,71 @@
             offset: 100
         });
 
-        function animateViewCount(target) {
-            const el = document.getElementById('live-view-count');
+        function animateCounter(id, target) {
+            const el = document.getElementById(id);
             if (!el) return;
-            const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
+            const current = parseInt(el.innerText.replace(/,/g, '')) || 0;
             if (current === target) return;
-            const duration = 1000;
-            const steps = 60;
-            const increment = (target - current) / steps;
-            let step = 0;
-            const timer = setInterval(() => {
-                step++;
-                const value = Math.round(current + increment * step);
-                el.textContent = value.toLocaleString();
-                if (step >= steps) {
-                    clearInterval(timer);
-                    el.textContent = target.toLocaleString();
+
+            let startTimestamp = null;
+            const duration = 1500; // 1.5 seconds
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (target - current) + current);
+                el.innerText = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 }
-            }, duration / steps);
+            };
+            window.requestAnimationFrame(step);
         }
 
-        function connectViewsWebSocket() {
+        async function sendLike() {
+            const btn = document.getElementById('like-btn');
+            if (btn.classList.contains('liked')) return;
+
+            btn.classList.add('liked');
+
+            try {
+                const response = await fetch('/api/like', { method: 'POST' });
+            } catch (error) {
+                console.error("Link to mainframe failed:", error);
+            }
+        }
+
+
+        function connectStatsWebSocket() {
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             const ws = new WebSocket(protocol + '//' + window.location.host + '/ws/views');
-            ws.onmessage = function(event) {
+
+            ws.onmessage = function (event) {
                 const data = JSON.parse(event.data);
                 if (data.total_views !== undefined) {
-                    animateViewCount(data.total_views);
+                    animateCounter('live-view-count', data.total_views);
+                }
+                if (data.total_likes !== undefined) {
+                    animateCounter('live-like-count', data.total_likes);
                 }
             };
-            ws.onclose = function() {
-                setTimeout(connectViewsWebSocket, 3000);
-            };
-            ws.onerror = function() {
-                ws.close();
-            };
+
+            ws.onclose = () => setTimeout(connectStatsWebSocket, 3000);
         }
 
-        fetch('/api/views')
-            .then(r => r.json())
-            .then(data => {
-                if (data.total_views !== undefined) {
-                    animateViewCount(data.total_views);
-                }
-            })
-            .catch(() => {});
-        connectViewsWebSocket();
+        async function fetchInitialStats() {
+            try {
+                const res = await fetch('/api/views');
+                const data = await res.json();
+                document.getElementById('live-view-count').innerText = data.total_views.toLocaleString();
+                document.getElementById('live-like-count').innerText = data.total_likes.toLocaleString();
+            } catch (e) { }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchInitialStats();
+            connectStatsWebSocket();
+        });
     </script>
 </body>
 
