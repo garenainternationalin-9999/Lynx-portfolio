@@ -3641,3 +3641,110 @@ body {
         height: 1px;
     }
 }
+
+.services-provided-section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.services-creative-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-creative-card {
+    background: rgba(15, 15, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px 25px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.service-creative-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(217, 35, 35, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 35, 35, 0.15);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(217, 35, 35, 0.1), rgba(217, 35, 35, 0.02));
+    border: 1px solid rgba(217, 35, 35, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #ff4d4d;
+    transition: all 0.4s ease;
+    box-shadow: inset 0 0 20px rgba(217, 35, 35, 0.05);
+}
+
+.service-creative-card:hover .service-icon {
+    background: #d92323;
+    color: #fff;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 25px rgba(217, 35, 35, 0.5);
+}
+
+.service-creative-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.service-creative-card:hover h3 {
+    color: #ff4d4d;
+}
+
+.service-creative-card p {
+    font-size: 0.95rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.service-creative-card:hover p {
+    color: #ccc;
+}
+
+.service-glow {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(217, 35, 35, 0.4) 0%, transparent 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.service-creative-card:hover .service-glow {
+    opacity: 1;
+    bottom: -20px;
+    width: 150px;
+    height: 150px;
+}
