@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     <style>
         * {
-            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"), auto !important;
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"),
+            auto !important;
         }
 
         a,
@@ -29,7 +30,8 @@
         .btn,
         .hamburger-menu,
         .chat-toggle-trigger {
-            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"), pointer !important;
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"),
+            pointer !important;
         }
 
         .lynx-footer {
@@ -61,7 +63,9 @@
             gap: 0.5rem;
         }
 
-        .footer-brand i { color: #ff3333; }
+        .footer-brand i {
+            color: #ff3333;
+        }
 
         .footer-brand p {
             color: #aaa;
@@ -69,7 +73,8 @@
             max-width: 300px;
         }
 
-        .footer-links h3, .footer-socials h3 {
+        .footer-links h3,
+        .footer-socials h3 {
             color: #fff;
             font-size: 1.2rem;
             margin-bottom: 1rem;
@@ -77,7 +82,8 @@
             display: inline-block;
         }
 
-        .footer-links h3::after, .footer-socials h3::after {
+        .footer-links h3::after,
+        .footer-socials h3::after {
             content: '';
             position: absolute;
             left: 0;
@@ -93,7 +99,9 @@
             margin: 0;
         }
 
-        .footer-links ul li { margin-bottom: 0.5rem; }
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
 
         .footer-links ul li a {
             color: #aaa;
@@ -101,7 +109,9 @@
             transition: color 0.3s;
         }
 
-        .footer-links ul li a:hover { color: #ff3333; }
+        .footer-links ul li a:hover {
+            color: #ff3333;
+        }
 
         .footer-socials .social-icons {
             display: flex;
@@ -119,7 +129,7 @@
             color: #fff;
             text-decoration: none;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .social-icons a:hover {
@@ -139,8 +149,17 @@
         }
 
         @media (max-width: 768px) {
-            .footer-content { flex-direction: column; align-items: center; text-align: center; }
-            .footer-links h3::after, .footer-socials h3::after { left: 50%; transform: translateX(-50%); }
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links h3::after,
+            .footer-socials h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
     </style>
 </head>
@@ -249,6 +268,56 @@
                                 class="animated-perspective-img">
                             <div class="glow-effect"></div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="services-provided-section">
+                <div class="section-header-centered">
+                    <h2 class="brand-title" style="font-size: 2.5rem;">OUR <span class="red-text">SERVICES</span></h2>
+                </div>
+                <div class="services-creative-grid">
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+                        <h3>Custom Bots</h3>
+                        <p>High-performance bots tailored for Discord, Telegram, and automated tasks.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3>Custom Websites</h3>
+                        <p>Modern, responsive, and full-stack web applications built from scratch.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="service-icon"><i class="fa-solid fa-film"></i></div>
+                        <h3>Video Editing</h3>
+                        <p>Professional video editing with clean transitions and visual effects.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+                        <h3>Automation Tools</h3>
+                        <p>Streamline your workflow with custom automation scripts and software.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="250">
+                        <div class="service-icon"><i class="fa-solid fa-user-secret"></i></div>
+                        <h3>Tools</h3>
+                        <p>Advanced Multi-purpose tools for the elites. Always active with something unique.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-icon"><i class="fa-solid fa-image"></i></div>
+                        <h3>Photo Editing</h3>
+                        <p>High-quality image manipulation, retouching, and graphic design.</p>
+                        <div class="service-glow"></div>
+                    </div>
+                    <div class="service-creative-card" data-aos="fade-up" data-aos-delay="350">
+                        <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>AI Integration</h3>
+                        <p>Seamless implementation of advanced AI models into your projects.</p>
+                        <div class="service-glow"></div>
                     </div>
                 </div>
             </section>
@@ -853,7 +922,8 @@
                 <h3>Connect</h3>
                 <div class="social-icons">
                     <a href="https://discord.gg/44mKrHfQ6q" target="_blank"><i class="fa-brands fa-discord"></i></a>
-                    <a href="https://www.youtube.com/@LYNX_X_999" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@LYNX_X_999" target="_blank"><i
+                            class="fa-brands fa-youtube"></i></a>
                     <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
                 </div>
             </div>
