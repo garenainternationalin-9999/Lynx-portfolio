@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     <style>
         * {
-            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0,
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}") 0 0,
             auto !important;
         }
 
@@ -30,8 +30,119 @@
         .btn,
         .hamburger-menu,
         .chat-toggle-trigger {
-            cursor: url("{{ url_for('static', path='Assets/cursor.webp') }}") 0 0,
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}") 0 0,
             pointer !important;
+        }
+
+        .lynx-footer {
+            background: rgba(10, 10, 10, 0.8);
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .footer-brand h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-brand i { color: #ff3333; }
+
+        .footer-brand p {
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h3, .footer-socials h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3::after, .footer-socials h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 30px;
+            height: 2px;
+            background: #ff3333;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links ul li { margin-bottom: 0.5rem; }
+
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover { color: #ff3333; }
+
+        .footer-socials .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons a:hover {
+            background: #ff3333;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+            padding-top: 1rem;
+            color: #777;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; align-items: center; text-align: center; }
+            .footer-links h3::after, .footer-socials h3::after { left: 50%; transform: translateX(-50%); }
         }
     </style>
 </head>
@@ -724,6 +835,35 @@
 
 
     </main>
+
+    <footer class="lynx-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2><i class="fa-solid fa-microchip"></i> LYNX</h2>
+                <p>Ultimate Web Development & PC Tools</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="switchTab('home')">Home</a></li>
+                    <li><a href="#" onclick="switchTab('services')">Projects</a></li>
+                    <li><a href="#" onclick="switchTab('store')">Store</a></li>
+                    <li><a href="#" onclick="switchTab('about')">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-socials">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="https://discord.gg/44mKrHfQ6q" target="_blank"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@LYNX_X_999" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LYNX. All rights reserved.</p>
+        </div>
+    </footer>
 
 
     <div id="image-modal" class="modal-overlay">
