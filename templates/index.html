@@ -19,8 +19,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     <style>
         * {
-            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}") 0 0,
-            auto !important;
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"), auto !important;
         }
 
         a,
@@ -30,8 +29,7 @@
         .btn,
         .hamburger-menu,
         .chat-toggle-trigger {
-            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}") 0 0,
-            pointer !important;
+            cursor: url("{{ url_for('static', path='Assets/cursor.png') }}"), pointer !important;
         }
 
         .lynx-footer {
@@ -845,10 +843,10 @@
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#" onclick="switchTab('home')">Home</a></li>
-                    <li><a href="#" onclick="switchTab('services')">Projects</a></li>
-                    <li><a href="#" onclick="switchTab('store')">Store</a></li>
-                    <li><a href="#" onclick="switchTab('about')">About</a></li>
+                    <li><a href="#" class="nav-pill" data-id="home">Home</a></li>
+                    <li><a href="#" class="nav-pill" data-id="services">Projects</a></li>
+                    <li><a href="#" class="nav-pill" data-id="store">Store</a></li>
+                    <li><a href="#" class="nav-pill" data-id="about">About</a></li>
                 </ul>
             </div>
             <div class="footer-socials">
