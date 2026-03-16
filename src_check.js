@@ -529,74 +529,12 @@ AOS.init({
     offset: 100
 });
 
-function animateCounter(id, target) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const current = parseInt(el.innerText.replace(/,/g, '')) || 0;
-    if (current === target) return;
-
-    let startTimestamp = null;
-    const duration = 1500;
-
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (target - current) + current);
-        el.innerText = value.toLocaleString();
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-async function sendLike() {
-    const btn = document.getElementById('like-btn');
-    if (btn.classList.contains('liked')) return;
-
-    btn.classList.add('liked');
-
-    try {
-        const response = await fetch('/api/like', { method: 'POST' });
-    } catch (error) {
-        console.error("Link to mainframe failed:", error);
-    }
-}
-
-
-function connectStatsWebSocket() {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(protocol + '//' + window.location.host + '/ws/views');
-
-    ws.onmessage = function (event) {
-        const data = JSON.parse(event.data);
-        if (data.total_views !== undefined) {
-            animateCounter('live-view-count', data.total_views);
-        }
-        if (data.total_likes !== undefined) {
-            animateCounter('live-like-count', data.total_likes);
-        }
-    };
-
-    ws.onclose = () => setTimeout(connectStatsWebSocket, 3000);
-}
-
-async function fetchInitialStats() {
-    try {
-        const res = await fetch('/api/views');
-        const data = await res.json();
-        document.getElementById('live-view-count').innerText = data.total_views.toLocaleString();
-        document.getElementById('live-like-count').innerText = data.total_likes.toLocaleString();
-    } catch (e) { }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     const footerEl = document.getElementById("dynamic-footer");
     if (footerEl) {
         footerEl.innerHTML = "<p>&copy; 2026 LYNX. All rights reserved. This source is created on lynxmodz.qzz.io OPEN SOURCE , by team Xeno</p>";
     }
-    fetchInitialStats();
-    connectStatsWebSocket();
     fetchPartnersAndTeam();
 });
 
