@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Lynx",
+        "pfp": "https://cdn.discordapp.com/avatars/1394305163136733205/8f0212dfe8897b8d552bfb3ecefc281d.png?size=1024",
+        "role": "Founder & Lead Developer",
+        "description": "Visionary behind the entire ecosystem. 17yo prodigy.",
+        "link": "https://discord.com/users/1394305163136733205"
+    },
+    {
+        "name": "Vexel",
+        "pfp": "https://cdn.discordapp.com/avatars/1481652276337709127/a203d3c08957aeec724c0047c9312644.png?size=1024",
+        "role": "Co-founder",
+        "description": "High-class Software Engineer, Web Developer, Malware and Security Expert.",
+        "link": "https://discord.com/users/1481652276337709127"
+    },
+    {
+        "name": "Evil rexy!",
+        "pfp": "https://cdn.discordapp.com/avatars/1432771000629596225/ec25a105532049b9cef0d426e0107bde.png?size=1024",
+        "role": "Developer",
+        "description": "Top-class bots expert.",
+        "link": "https://discord.com/users/1432771000629596225"
+    },
+    {
+        "name": "Billa babu",
+        "pfp": "https://cdn.discordapp.com/avatars/1296506347273195532/56fe41b3a761207d9c7d1d8c64b17e44.png?size=1024",
+        "role": "Developer",
+        "description": "top class , tools and web expert .",
+        "link": "https://discord.com/users/1296506347273195532"
+    }
+]
