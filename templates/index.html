@@ -327,6 +327,24 @@
                     <h2 class="brand-title" style="font-size: 2.5rem;">OUR <span class="red-text">PARTNERS</span></h2>
                 </div>
                 <div class="partners-creative-grid" id="partners-container">
+                    {% for partner in partners %}
+                    <div class="entity-creative-card partner-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                        <div class="entity-img-wrapper">
+                            <img src="{{ partner.pfp }}" alt="{{ partner.name }}">
+                        </div>
+                        <div class="entity-info">
+                            <h3>{{ partner.name }}</h3>
+                            <span class="entity-role">{{ partner.role }}</span>
+                            <p class="entity-desc">{{ partner.description }}</p>
+                        </div>
+                        <div class="entity-contact">
+                            <a href="{{ partner.link }}" target="_blank" class="entity-link-btn">
+                                <i class="fa-brands fa-discord"></i> Connect
+                            </a>
+                        </div>
+                        <div class="entity-glow"></div>
+                    </div>
+                    {% endfor %}
                 </div>
             </section>
 
@@ -335,6 +353,24 @@
                     <h2 class="brand-title" style="font-size: 2.5rem;">OUR <span class="outline-text">TEAM</span></h2>
                 </div>
                 <div class="team-creative-grid" id="team-container">
+                    {% for member in team %}
+                    <div class="entity-creative-card team-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+                        <div class="entity-img-wrapper">
+                            <img src="{{ member.pfp }}" alt="{{ member.name }}">
+                        </div>
+                        <div class="entity-info">
+                            <h3>{{ member.name }}</h3>
+                            <span class="entity-role">{{ member.role }}</span>
+                            <p class="entity-desc">{{ member.description }}</p>
+                        </div>
+                        <div class="entity-contact">
+                            <a href="{{ member.link }}" target="_blank" class="entity-link-btn">
+                                <i class="fa-brands fa-discord"></i> Connect
+                            </a>
+                        </div>
+                        <div class="entity-glow"></div>
+                    </div>
+                    {% endfor %}
                 </div>
             </section>
 
@@ -349,6 +385,26 @@
                     </div>
                 </div>
                 <div class="reviews-grid" id="google-reviews-container">
+                    {% for review in reviews %}
+                    <div class="google-review-card" data-aos="fade-up">
+                        <div class="review-header">
+                            <img src="{{ review.pfp }}" alt="{{ review.name }}" class="review-pfp">
+                            <div class="review-meta">
+                                <span class="review-author">{{ review.name }}</span>
+                                <div class="review-stars">
+                                    {% for i in range(5) %}
+                                    <i class="fa-solid fa-star {{ 'active' if i < review.stars else '' }}"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="review-text">{{ review.content }}</p>
+                        <div class="google-logo-mini">
+                            <i class="fa-brands fa-google"></i>
+                            <span>Verified</span>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </section>
 
@@ -391,7 +447,7 @@
             <div class="about-container">
                 <div class="about-text">
                     <h1 class="about-title">ABOUT <span class="red-text">ME</span></h1>
-                    <p>Hey, i am LYNX jsut an another 17 yrs old developer , always here trying to learning something
+                    <p>Hey, i am LYNX just an another 17 yrs old developer , always here trying to learning something
                         new .</p>
                     <p>I maked pc tools , hacking tools , full stack websites etc . Python , Java expert . Feel free to
                         dm me on my discord .</p>
@@ -551,12 +607,52 @@
                     <div class="games-library-container" style="width: 100%; margin-top: 60px;">
                         <h2 class="section-subtitle" style="text-align: left; margin-bottom: 30px; font-size: 1.8rem;">
                             MY <span class="red-text">GAMES</span></h2>
-                        <div id="games-library-root" class="games-library-root">
-                            <div class="library-loading">
-                                <i class="fa-solid fa-gamepad fa-spin"></i>
-                                <span>Accessing Steam mainframes...</span>
+                    <div id="games-library-root" class="games-library-root">
+                        {% if games_data and games_data.favorite_game %}
+                        {% set fav = games_data.favorite_game %}
+                        <div class="fav-game-card" data-aos="fade-right">
+                            <div class="fav-badge">FAVOURITE GAME</div>
+                            <div class="fav-game-visual">
+                                <img src="{{ fav.image }}" alt="{{ fav.title }}">
+                                <div class="fav-overlay"></div>
+                            </div>
+                            <div class="fav-game-info">
+                                <h3>{{ fav.title }}</h3>
+                                <p>{{ fav.description }}</p>
+                                <div class="fav-stats">
+                                    <div class="fav-stat">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>{{ fav.hours_played }} HRS PLAYED</span>
+                                    </div>
+                                    <div class="fav-stat">
+                                        <i class="fa-solid fa-star"></i>
+                                        <span>MASTERED</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        <div class="games-grid">
+                            {% if games_data and games_data.library %}
+                            {% for game in games_data.library %}
+                            <div class="game-item-card" data-aos="fade-up">
+                                <div class="game-cover">
+                                    <img src="{{ game.image }}" alt="{{ game.title }}">
+                                    <div class="game-status-tag">{{ game.status }}</div>
+                                </div>
+                                <div class="game-details">
+                                    <h4>{{ game.title }}</h4>
+                                    <div class="game-playtime">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>{{ game.hours_played }}h played</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -667,119 +763,43 @@
                     </h1>
                 </header>
                 <section class="tools-grid">
-
+                    {% for project in projects %}
                     <div class="paragon-card">
+                        {% if project.featured %}
                         <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
+                        {% endif %}
                         <div class="card-header">
-                            <i class="fa-brands fa-discord"></i>
-                            <h2>PrimeX discord bot</h2>
+                            <i class="{{ project.icon }}"></i>
+                            <h2>{{ project.title }}</h2>
                         </div>
                         <div class="card-content">
                             <div class="project-lang-tags">
+                                {% for lang in project.languages %}
                                 <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/Python.webp') }}" alt="Python">
-                                    <span>Python</span>
+                                    <img src="{{ lang.img }}" alt="{{ lang.name }}">
+                                    <span>{{ lang.name }}</span>
                                 </div>
+                                {% endfor %}
                             </div>
                             <div class="btn-group">
-                                <a href="https://discord.com/oauth2/authorize?client_id=1469585966347059365"
-                                    target="_blank" class="btn btn-primary">
-                                    <i class="fa-solid fa-plus"></i> Invite Bot
+                                <a href="{{ project.link }}" target="_blank" class="btn btn-primary">
+                                    <i class="{{ project.link_icon }}"></i> {{ project.link_text }}
                                 </a>
                             </div>
                             <div class="project-description-text">
-                                A powerful, feature-rich Discord bot designed for ultimate server management and
-                                entertainment. Comes with 600+ total commands and high-end music system.
+                                {{ project.description }}
                             </div>
                             <div class="always-show-features">
-                                <div class="feature-title"><i class="fa-solid fa-list-ul"></i> DESCRIPTION</div>
+                                <div class="feature-title"><i class="fa-solid fa-list-ul"></i> {{ project.features_title }}</div>
                                 <div class="feature-list">
-                                    <div class="f-item"><i class="fa-solid fa-shield"></i> Advance security</div>
-                                    <div class="f-item"><i class="fa-solid fa-music"></i> Premium music</div>
+                                    {% for feature in project.features %}
+                                    <div class="f-item"><i class="{{ feature.icon }}"></i> {{ feature.text }}</div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="paragon-card">
-                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
-                        <div class="card-header">
-                            <i class="fa-solid fa-shield-halved icon-red"></i>
-                            <h2>LYNX AUTH</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="project-lang-tags">
-                                <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/Python.webp') }}" alt="Python">
-                                    <span>Python</span>
-                                </div>
-                                <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/node.png') }}" alt="JS">
-                                    <span>JS</span>
-                                </div>
-                            </div>
-                            <div class="btn-group">
-                                <a href="https://lynxauth.qzz.io/" target="_blank" class="btn btn-primary">
-                                    <i class="fa-solid fa-link"></i> View Project
-                                </a>
-                            </div>
-                            <div class="project-description-text">
-                                A secure and robust authentication system for applications, featuring real-time
-                                monitoring and HWID locking.
-                            </div>
-                            <div class="always-show-features">
-                                <div class="feature-title"><i class="fa-solid fa-lock"></i> SECURITY</div>
-                                <div class="feature-list">
-                                    <div class="f-item"><i class="fa-solid fa-fingerprint"></i> HWID Verification</div>
-                                    <div class="f-item"><i class="fa-solid fa-cloud"></i> Real-time Dashboard</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="paragon-card">
-                        <div class="badge-opensource"><i class="fa-solid fa-star"></i> Featured</div>
-                        <div class="card-header">
-                            <i class="fa-regular fa-circle-user"></i>
-                            <h2>Portfolio Website</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="project-lang-tags">
-                                <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/html.png') }}" alt="HTML">
-                                    <span>HTML</span>
-                                </div>
-                                <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/css.png') }}" alt="CSS">
-                                    <span>CSS</span>
-                                </div>
-                                <div class="project-lang-tag">
-                                    <img src="{{ url_for('static', path='Assets/node.png') }}" alt="JS">
-                                    <span>JS</span>
-                                </div>
-                            </div>
-                            <div class="btn-group">
-                                <a href="#" target="_blank" class="btn btn-primary">
-                                    <i class="fa-solid fa-link"></i> View Project
-                                </a>
-                            </div>
-                            <div class="project-description-text">
-                                This portfolio showcases the projects and digital solutions created by our team.
-                                We provide a range of services including web development, optimization, and custom
-                                digital solutions.
-                            </div>
-                            <div class="always-show-features">
-                                <div class="feature-title"><i class="fa-solid fa-star"></i> HIGHLIGHTS</div>
-                                <div class="feature-list">
-                                    <div class="f-item"><i class="fa-solid fa-heart"></i> The project closest to me.
-                                    </div>
-                                    <div class="f-item"><i class="fa-solid fa-circle-user"></i> About my everything.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    {% endfor %}
                 </section>
             </div>
         </div>
@@ -798,63 +818,23 @@
                     <div class="cat-label label-red">Paid</div>
                     <h2 class="cat-title">Paid Services</h2>
                     <div class="store-grid">
+                        {% for item in store.paid %}
                         <div class="store-card red-theme">
-                            <h3>Custom Optimization pack+</h3>
-                            <div class="store-price">₹600 <span class="currency">INR</span><span class="time"><i
-                                        class="far fa-clock"></i> Lifetime</span></div>
-                            <p class="store-desc">The package you won't get anywhere else. By the Elites, for the
-                                Elites. Completely re-designed from the ground up, tailored to YOUR system.</p><a
-                                href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="store-btn btn-red">Buy
-                                Now</a>
+                            <h3>{{ item.title }}</h3>
+                            <div class="store-price">{{ item.price }} <span class="currency">{{ item.currency }}</span>{% if item.time %}<span class="time"><i class="far fa-clock"></i> {{ item.time }}</span>{% endif %}</div>
+                            <p class="store-desc">{{ item.description }}</p>
+                            <a href="{{ item.link }}" target="_blank" class="store-btn btn-red">Buy Now</a>
                             <div class="store-features">
                                 <p>Features:</p>
                                 <ul>
-                                    <li><i class="fas fa-check"></i> Customize your optimization pack ,according to your
-                                        budget.</li>
-                                    <li><i class="fas fa-check"></i> Advanced Cleaning</li>
-                                    <li><i class="fas fa-check"></i> Hidden Tweaking</li>
-                                    <li><i class="fas fa-check"></i> Advance tools like optV0 & optV2</li>
+                                    {% for feature in item.features %}
+                                    <li><i class="fas fa-check"></i> {{ feature }}</li>
+                                    {% endfor %}
                                 </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('Elite', ['/static/Assets/lynxpremium.png'])">Learn More <i
-                                    class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <button class="store-learn-more" onclick='openModal("{{ item.modal.title }}", {{ item.modal.images | tojson }})'>Learn More <i class="fas fa-arrow-right"></i></button>
                         </div>
-                        <div class="store-card red-theme">
-                            <h3>Custom Work</h3>
-                            <div class="store-price">₹400<span class="currency">INR</span><span class="time"><i
-                                        class="far fa-clock"></i> Lifetime</span></div>
-                            <p class="store-desc">A powerful and affordable starting point for any setup. Register your
-                                custom work package through our Discord and explore a wide range of web-based and
-                                digital services. For inquiries, support, or custom solutions, connect with us on
-                                Discord.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
-                                class="store-btn btn-red">Buy
-                                Now</a>
-                            <div class="store-features">
-                                <p>Features:</p>
-                                <ul>
-                                    <li><i class="fas fa-check"></i> Amazing discord bots & websites</li>
-                                    <li><i class="fas fa-check"></i> Hosting and security managed by us.</li>
-                                </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('Foundation', ['/static/Assets/lynxv.2.png'])">Learn More <i
-                                    class="fas fa-arrow-right"></i></button>
-                        </div>
-                        <div class="store-card red-theme">
-                            <h3>Paid tools & Projects</h3>
-                            <div class="store-price">₹100<span class="currency">Starting price.</span></div>
-                            <p class="store-desc">Buy our any project source or any tools at very affordable price.</p>
-                            <a href="https://discord.gg/Sz5ZGfk3GX" target="_blank" class="store-btn btn-red">Buy
-                                Now</a>
-                            <div class="store-features">
-                                <p>Features:</p>
-                                <ul>
-                                    <li><i class="fas fa-check"></i> Premium tools</li>
-                                    <li><i class="fas fa-check"></i> Best Projects.</li>
-                                </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('PC optimization', ['/static/Assets/optimization.png'])">Learn More
-                                <i class="fas fa-arrow-right"></i></button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -862,51 +842,23 @@
                     <div class="cat-label label-purple">Free</div>
                     <h2 class="cat-title">Free Services</h2>
                     <div class="store-grid">
+                        {% for item in store.free %}
                         <div class="store-card purple-theme">
-                            <h3>SOON..</h3>
-                            <div class="store-price">₹99 <span class="currency">INR</span></div>
-                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
-                                class="store-btn btn-purple">Pre - register</a>
+                            <h3>{{ item.title }}</h3>
+                            <div class="store-price">{{ item.price }} <span class="currency">{{ item.currency }}</span></div>
+                            <p class="store-desc">{{ item.description }}</p>
+                            <a href="{{ item.link }}" target="_blank" class="store-btn btn-purple">Pre - register</a>
                             <div class="store-features">
                                 <p>Features:</p>
                                 <ul>
-                                    <li><i class="fas fa-check"></i> soon.</li>
-                                    <li><i class="fas fa-check"></i> soon.</li>
+                                    {% for feature in item.features %}
+                                    <li><i class="fas fa-check"></i> {{ feature }}</li>
+                                    {% endfor %}
                                 </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('??', ['https://via.placeholder.com/800x450/220022/ffffff?text=OC+Bundle+SS'])">Learn
-                                More <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <button class="store-learn-more" onclick='openModal("{{ item.modal.title }}", {{ item.modal.images | tojson }})'>Learn More <i class="fas fa-arrow-right"></i></button>
                         </div>
-                        <div class="store-card purple-theme">
-                            <h3>SOON..</h3>
-                            <div class="store-price">₹100 <span class="currency">INR</span></div>
-                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
-                                class="store-btn btn-purple">Pre - register</a>
-                            <div class="store-features">
-                                <p>Features:</p>
-                                <ul>
-                                    <li><i class="fas fa-check"></i> soon.</li>
-                                    <li><i class="fas fa-check"></i> soon.</li>
-                                </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('??', ['https://via.placeholder.com/800x450/330033/ffffff?text=RAM+SS'])">Learn
-                                More <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                        <div class="store-card purple-theme">
-                            <h3>SOON..</h3>
-                            <div class="store-price">₹90 <span class="currency">INR</span></div>
-                            <p class="store-desc">soon.</p><a href="https://discord.gg/Sz5ZGfk3GX" target="_blank"
-                                class="store-btn btn-purple">Pre - register</a>
-                            <div class="store-features">
-                                <p>Features:</p>
-                                <ul>
-                                    <li><i class="fas fa-check"></i> soon.</li>
-                                    <li><i class="fas fa-check"></i> soon.</li>
-                                </ul>
-                            </div><button class="store-learn-more"
-                                onclick="openModal('??', ['https://via.placeholder.com/800x450/440044/ffffff?text=CPU+SS'])">Learn
-                                More <i class="fas fa-arrow-right"></i></button>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -1015,6 +967,14 @@
     <script src="{{ url_for('static', path='script.js') }}"></script>
     <script src="{{ url_for('static', path='services.js') }}"></script>
 
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false; // F12
+            if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+    </script>
 </body>
 
 </html>
