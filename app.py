@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import requests
@@ -158,6 +158,15 @@ async def chat(request: Request):
         return JSONResponse({"reply": groq_data["choices"][0]["message"]["content"]})
     except Exception as e:
         return JSONResponse({"error": "Connection to mainframe failed."}, status_code=500)
+
+@app.get("/source-check")
+async def source_check():
+    try:
+        with open("src_check.js", "r", encoding="utf-8") as f:
+            content = f.read()
+        return PlainTextResponse(content)
+    except Exception as e:
+        return PlainTextResponse(f"Error reading file: {e}", status_code=500)
 
 if __name__ == "__main__":
     import uvicorn
