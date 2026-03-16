@@ -73,6 +73,7 @@ async def broadcast_stats():
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
+    # Stats logic
     doc = stats_ref.get()
 
     if not doc.exists:
@@ -86,7 +87,53 @@ async def home(request: Request):
         })
 
     asyncio.create_task(broadcast_stats())
-    return templates.TemplateResponse("index.html", {"request": request})
+
+    # Load data from JSON files
+    try:
+        with open("static/partners.json", "r", encoding="utf-8") as f:
+            partners = json.load(f)
+        with open("static/team.json", "r", encoding="utf-8") as f:
+            team = json.load(f)
+        with open("static/Reviws.json", "r", encoding="utf-8") as f:
+            reviews = json.load(f)
+        with open("static/games_lib.json", "r", encoding="utf-8") as f:
+            games_data = json.load(f)
+        with open("static/projects.json", "r", encoding="utf-8") as f:
+            projects = json.load(f)
+        with open("static/store.json", "r", encoding="utf-8") as f:
+            store = json.load(f)
+    except Exception as e:
+        print(f"Error loading JSON data: {e}")
+        partners, team, reviews, games_data, projects, store = [], [], [], {}, [], {}
+
+    # Calculate hours for games
+    from datetime import datetime
+    def calculate_hours(base, install_date_str):
+        try:
+            install_date = datetime.fromisoformat(install_date_str.replace('Z', '+00:00'))
+            now = datetime.now(install_date.tzinfo)
+            diff_days = (now - install_date).days
+            return base + diff_days
+        except:
+            return base
+
+    if games_data:
+        fav = games_data.get('favorite_game', {})
+        if fav:
+            fav['hours_played'] = calculate_hours(fav.get('hours_played_base', 0), fav.get('install_date', ''))
+        
+        for game in games_data.get('library', []):
+            game['hours_played'] = calculate_hours(game.get('hours_played_base', 0), game.get('install_date', ''))
+
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "partners": partners,
+        "team": team,
+        "reviews": reviews,
+        "games_data": games_data,
+        "projects": projects,
+        "store": store
+    })
 
 @app.get("/api/views")
 async def get_views_api():
