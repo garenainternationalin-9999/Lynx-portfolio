@@ -322,6 +322,23 @@
                 </div>
             </section>
 
+            <section class="partners-section">
+                <div class="section-header-centered">
+                    <h2 class="brand-title" style="font-size: 2.5rem;">OUR <span class="red-text">PARTNERS</span></h2>
+                </div>
+                <div class="partners-creative-grid" id="partners-container">
+                </div>
+            </section>
+
+            <section class="team-section">
+                <div class="section-header-centered">
+                    <h2 class="brand-title" style="font-size: 2.5rem;">OUR <span class="outline-text">TEAM</span></h2>
+                </div>
+                <div class="team-creative-grid" id="team-container">
+                </div>
+            </section>
+
+
             <section class="google-reviews-section">
                 <div class="section-header-centered">
                     <h2 class="brand-title" style="font-size: 2.5rem;">CLIENT <span class="outline-text">REVIEWS</span>
@@ -363,11 +380,6 @@
                             <span class="stat-label">Like our work? click this heart</span>
                             <span class="stat-number" id="live-like-count">0</span>
                         </div>
-                    </div>
-
-                    <div class="live-tag">
-                        <span class="status-blink"></span>
-                        your reviews are counted in live.
                     </div>
                 </div>
             </section>
@@ -752,8 +764,9 @@
                                 </a>
                             </div>
                             <div class="project-description-text">
-                                My personal portfolio website designed with a premium, dark-themed aesthetic and
-                                high-performance animations.
+                                This portfolio showcases the projects and digital solutions created by our team.
+                                We provide a range of services including web development, optimization, and custom
+                                digital solutions.
                             </div>
                             <div class="always-show-features">
                                 <div class="feature-title"><i class="fa-solid fa-star"></i> HIGHLIGHTS</div>
@@ -1124,7 +1137,71 @@
         document.addEventListener("DOMContentLoaded", () => {
             fetchInitialStats();
             connectStatsWebSocket();
+            fetchPartnersAndTeam();
         });
+
+        async function fetchPartnersAndTeam() {
+            try {
+                const partnersRes = await fetch('/static/partners.json');
+                if (partnersRes.ok) {
+                    const partners = await partnersRes.json();
+                    const partnersContainer = document.getElementById('partners-container');
+                    if (partnersContainer) {
+                        partners.forEach((partner, index) => {
+                            const delay = index * 100;
+                            partnersContainer.innerHTML += `
+                                <div class="entity-creative-card partner-card" data-aos="fade-up" data-aos-delay="${delay}">
+                                    <div class="entity-img-wrapper">
+                                        <img src="${partner.pfp}" alt="${partner.name}">
+                                    </div>
+                                    <div class="entity-info">
+                                        <h3>${partner.name}</h3>
+                                        <span class="entity-role">${partner.role}</span>
+                                        <p class="entity-desc">${partner.description}</p>
+                                    </div>
+                                    <div class="entity-contact">
+                                        <a href="${partner.link}" target="_blank" class="entity-link-btn">
+                                            <i class="fa-brands fa-discord"></i> Connect
+                                        </a>
+                                    </div>
+                                    <div class="entity-glow"></div>
+                                </div>
+                            `;
+                        });
+                    }
+                }
+
+                const teamRes = await fetch('/static/team.json');
+                if (teamRes.ok) {
+                    const team = await teamRes.json();
+                    const teamContainer = document.getElementById('team-container');
+                    if (teamContainer) {
+                        team.forEach((member, index) => {
+                            const delay = index * 100;
+                            teamContainer.innerHTML += `
+                                <div class="entity-creative-card team-card" data-aos="fade-up" data-aos-delay="${delay}">
+                                    <div class="entity-img-wrapper">
+                                        <img src="${member.pfp}" alt="${member.name}">
+                                    </div>
+                                    <div class="entity-info">
+                                        <h3>${member.name}</h3>
+                                        <span class="entity-role">${member.role}</span>
+                                        <p class="entity-desc">${member.description}</p>
+                                    </div>
+                                    <div class="entity-contact">
+                                        <a href="${member.link}" target="_blank" class="entity-link-btn">
+                                            <i class="fa-brands fa-discord"></i> Connect
+                                        </a>
+                                    </div>
+                                    <div class="entity-glow"></div>
+                                </div>
+                            `;
+                        });
+                    }
+                }
+            } catch (err) {
+            }
+        }
     </script>
 </body>
 
