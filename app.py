@@ -255,7 +255,7 @@ INDEX_HTML_TEMPLATE = r"""
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         // DOMAIN GUARD & SECURITY
-        const authorized = ['localhost', '127.0.0.1', 'lynx-portfolio.render.com'];
+        const authorized = ['localhost', '127.0.0.1', 'lynxmodz.qzz.io'];
         if (!authorized.includes(window.location.hostname)) {
             document.body.innerHTML = '<div style="background:#000;color:red;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;"><div><h1>SYSTEM LOCKED</h1><p>Unauthorized Domain Interface</p></div></div>';
         }
