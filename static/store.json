@@ -1,0 +1,74 @@
+{
+    "paid": [
+        {
+            "title": "Custom Optimization pack+",
+            "price": "₹600",
+            "currency": "INR",
+            "time": "Lifetime",
+            "description": "The package you won't get anywhere else. By the Elites, for the Elites. Completely re-designed from the ground up, tailored to YOUR system.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": [
+                "Customize your optimization pack ,according to your budget.",
+                "Advanced Cleaning",
+                "Hidden Tweaking",
+                "Advance tools like optV0 & optV2"
+            ],
+            "modal": {"title": "Elite", "images": ["/static/Assets/lynxpremium.png"]}
+        },
+        {
+            "title": "Custom Work",
+            "price": "₹400",
+            "currency": "INR",
+            "time": "Lifetime",
+            "description": "A powerful and affordable starting point for any setup. Register your custom work package through our Discord and explore a wide range of web-based and digital services. For inquiries, support, or custom solutions, connect with us on Discord.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": [
+                "Amazing discord bots & websites",
+                "Hosting and security managed by us."
+            ],
+            "modal": {"title": "Foundation", "images": ["/static/Assets/lynxv.2.png"]}
+        },
+        {
+            "title": "Paid tools & Projects",
+            "price": "₹100",
+            "currency": "Starting price.",
+            "time": "",
+            "description": "Buy our any project source or any tools at very affordable price.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": [
+                "Premium tools",
+                "Best Projects."
+            ],
+            "modal": {"title": "PC optimization", "images": ["/static/Assets/optimization.png"]}
+        }
+    ],
+    "free": [
+        {
+            "title": "SOON..",
+            "price": "₹99",
+            "currency": "INR",
+            "description": "soon.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": ["soon.", "soon."],
+            "modal": {"title": "??", "images": ["https://via.placeholder.com/800x450/220022/ffffff?text=OC+Bundle+SS"]}
+        },
+        {
+            "title": "SOON..",
+            "price": "₹100",
+            "currency": "INR",
+            "description": "soon.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": ["soon.", "soon."],
+            "modal": {"title": "??", "images": ["https://via.placeholder.com/800x450/330033/ffffff?text=RAM+SS"]}
+        },
+        {
+            "title": "SOON..",
+            "price": "₹90",
+            "currency": "INR",
+            "description": "soon.",
+            "link": "https://discord.gg/Sz5ZGfk3GX",
+            "features": ["soon.", "soon."],
+            "modal": {"title": "??", "images": ["https://via.placeholder.com/800x450/440044/ffffff?text=CPU+SS"]}
+        }
+    ]
+}

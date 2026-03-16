@@ -1,0 +1,56 @@
+[
+    {
+        "title": "PrimeX discord bot",
+        "icon": "fa-brands fa-discord",
+        "featured": true,
+        "languages": [
+            {"name": "Python", "img": "/static/Assets/Python.webp"}
+        ],
+        "link": "https://discord.com/oauth2/authorize?client_id=1469585966347059365",
+        "link_text": "Invite Bot",
+        "link_icon": "fa-solid fa-plus",
+        "description": "A powerful, feature-rich Discord bot designed for ultimate server management and entertainment. Comes with 600+ total commands and high-end music system.",
+        "features_title": "DESCRIPTION",
+        "features": [
+            {"icon": "fa-solid fa-shield", "text": "Advance security"},
+            {"icon": "fa-solid fa-music", "text": "Premium music"}
+        ]
+    },
+    {
+        "title": "LYNX AUTH",
+        "icon": "fa-solid fa-shield-halved icon-red",
+        "featured": true,
+        "languages": [
+            {"name": "Python", "img": "/static/Assets/Python.webp"},
+            {"name": "JS", "img": "/static/Assets/node.png"}
+        ],
+        "link": "https://lynxauth.qzz.io/",
+        "link_text": "View Project",
+        "link_icon": "fa-solid fa-link",
+        "description": "A secure and robust authentication system for applications, featuring real-time monitoring and HWID locking.",
+        "features_title": "SECURITY",
+        "features": [
+            {"icon": "fa-solid fa-fingerprint", "text": "HWID Verification"},
+            {"icon": "fa-solid fa-cloud", "text": "Real-time Dashboard"}
+        ]
+    },
+    {
+        "title": "Portfolio Website",
+        "icon": "fa-regular fa-circle-user",
+        "featured": true,
+        "languages": [
+            {"name": "HTML", "img": "/static/Assets/html.png"},
+            {"name": "CSS", "img": "/static/Assets/css.png"},
+            {"name": "JS", "img": "/static/Assets/node.png"}
+        ],
+        "link": "#",
+        "link_text": "View Project",
+        "link_icon": "fa-solid fa-link",
+        "description": "This portfolio showcases the projects and digital solutions created by our team. We provide a range of services including web development, optimization, and custom digital solutions.",
+        "features_title": "HIGHLIGHTS",
+        "features": [
+            {"icon": "fa-solid fa-heart", "text": "The project closest to me."},
+            {"icon": "fa-solid fa-circle-user", "text": "About my everything."}
+        ]
+    }
+]
