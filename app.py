@@ -168,6 +168,18 @@ async def source_check():
     except Exception as e:
         return PlainTextResponse(f"Error reading file: {e}", status_code=500)
 
+@app.get("/api/branding")
+async def get_branding():
+    try:
+        response = requests.get("https://lynxmodz.qzz.io/rights", timeout=5)
+        if response.status_code == 200:
+            return PlainTextResponse(response.text)
+        else:
+            return PlainTextResponse("© 2026 LYNX. All rights reserved.")
+    except Exception:
+        return PlainTextResponse("© 2026 LYNX. All rights reserved. This web is created by team Xeno Lynx")
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
