@@ -593,7 +593,7 @@ async function fetchInitialStats() {
 document.addEventListener("DOMContentLoaded", () => {
     const footerEl = document.getElementById("dynamic-footer");
     if (footerEl) {
-        footerEl.innerHTML = "<p>&copy; 2026 LYNX. All rights reserved. This source is created on lynxmodz.qzz.io OPEN SOURCE , by team Xeno</p>";
+        footerEl.innerHTML = "<p>&copy; 2026 LYNX. All rights reserved. This web is created by team Xeno Lynx</p>";
     }
     fetchInitialStats();
     connectStatsWebSocket();
