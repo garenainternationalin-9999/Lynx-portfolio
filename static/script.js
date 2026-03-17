@@ -591,14 +591,24 @@ async function fetchInitialStats() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const footerEl = document.getElementById("dynamic-footer");
-    if (footerEl) {
-        footerEl.innerHTML = "<p>&copy; 2026 LYNX. All rights reserved. This web is created by team Xeno Lynx</p>";
-    }
+    initFooterBranding();
     fetchInitialStats();
     connectStatsWebSocket();
     fetchPartnersAndTeam();
 });
+
+async function initFooterBranding() {
+    const footerEl = document.getElementById("dynamic-footer");
+    if (!footerEl) return;
+
+    try {
+        const response = await fetch('/api/branding');
+        const brandingText = await response.text();
+        footerEl.innerHTML = `<p>${brandingText}</p>`;
+    } catch (err) {
+        footerEl.innerHTML = "<p>&copy; 2026 LYNX. All rights reserved. This web is created by team Xeno Lynx</p>";
+    }
+}
 
 async function fetchPartnersAndTeam() {
     try {
